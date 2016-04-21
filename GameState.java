@@ -1,4 +1,4 @@
-/* Class to hold the game state. */
+/* Holds the game state variables. */
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,10 +10,13 @@ public class GameState implements java.io.Serializable {
    /** Max health to start the player at. */
    private static final int MAX_HEALTH = 100;
 
+   /** Max wave round number. */
+   private static final int MAX_WAVE_NUM = 10;
+
    private int waveNum;
    private Timer roundTimeLeft;
    private List<Unit> activeUnits;
-   private int health;
+   private int playerHealth;
    private int difficulty;
 
    /** Default constructor. */
@@ -21,7 +24,7 @@ public class GameState implements java.io.Serializable {
       waveNum = 1;
       roundTimeLeft = new Timer(); 
       activeUnits = new ArrayList<Unit>();
-      health = MAX_HEALTH;
+      playerHealth = MAX_HEALTH;
       difficulty = 0;
    }
 
@@ -38,11 +41,12 @@ public class GameState implements java.io.Serializable {
     * @param newWaveNum The new wave number.
     */
    public void setWaveNum(int newWaveNum) {
-      if (newWaveNum >= 1 && newWaveNum <= 10) {
+      if (newWaveNum >= 1 && newWaveNum <= MAX_WAVE_NUM) {
          waveNum = newWaveNum;
       }
       else {
-         throw new IllegalArgumentException("New wave number must be between 1-10 (inclusive). Given: " + newWaveNum);
+         throw new IllegalArgumentException(
+          "New wave number must be between 1-10 (inclusive). Given: " + newWaveNum);
       }
    }
 
@@ -68,36 +72,38 @@ public class GameState implements java.io.Serializable {
     * @return True if the unit was sucessfully removed.
     */
    public boolean removeActiveUnit(Unit unitToRemove) {
-      
-      return false;
+      return activeUnits.remove(unitToRemove);
    }
 
    /**
     * Adds the given Unit to the list of active units.
     * @param unitToAdd The unit to add to the list.
+    * @return True if the Unit was successfully added.
     */
    public void addActiveUnit(Unit unitToAdd) {
-      
+      return activeUnits.add(unitToAdd);
    }
 
    /**
     * Returns the player's health.
     * @return The player's health.
     */
-   public int getHealth() {
-      return health;
+   public int getPlayerHealth() {
+      return playerHealth;
    }
 
    /**
     * Sets the player's health to the given value.
     * @param newHealth The new health value.
     */
-   public void setHealth(int newHealth) {
+   public void setPlayerHealth(int newHealth) {
       if (newHealth > 0 && newHealth < MAX_HEALTH) {
-         health = newHealth;
+         playerHealth = newHealth;
       }
       else {
-         throw new IllegalArgumentException("New health must be between 0 and " + MAX_HEALTH + " (inclusive). Given: " + newHealth);
+         throw new IllegalArgumentException(
+          "New health must be between 0 and " + MAX_HEALTH + 
+          " (inclusive). Given: " + newHealth);
       }
    }
 
