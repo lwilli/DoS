@@ -80,7 +80,7 @@ public class GameState implements java.io.Serializable {
     * @param unitToAdd The unit to add to the list.
     * @return True if the Unit was successfully added.
     */
-   public void addActiveUnit(Unit unitToAdd) {
+   public boolean addActiveUnit(Unit unitToAdd) {
       return activeUnits.add(unitToAdd);
    }
 
