@@ -7,6 +7,15 @@ import javax.swing.Timer;
 
 import javax.swing.JLabel;
 import javax.swing.GroupLayout;
+
+/*
+To start TimerView include a JLabel in the parameters
+@timer is the timer object
+@startTime always starts at zero
+@label the user has to set up the label
+@endtime is to be set up at 3000 secs 5 minutes
+@finish a boolean to declare when to stop the timer
+ */
 public class TimerView {
     private Timer timer;
     private int minutes;
@@ -15,12 +24,16 @@ public class TimerView {
     private JLabel label;
     private boolean finish = false;
 
-    public TimerView (int start, JLabel label) {
+    public TimerView (JLabel label) {
         this.minutes = 0;
-        this.startTime = start;
+        this.startTime = 0;
         this.endTime = 3000;
+        this.label = label;
     }
 
+    /*
+    set up the timer Object to 3000 seconds
+     */
     public void startTimer() {
         this.timer = new Timer(1000, new ActionListener() {
             @Override
@@ -48,11 +61,13 @@ public class TimerView {
         timer.start();
     }
 
+    /*pause time */
     public void pauseTimer() {
         timer.stop();
     }
-
+    /*resume time */
     public void resumeTimer() {
         timer.start();
     }
+
 }
