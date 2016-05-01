@@ -27,7 +27,7 @@ public class TimerView {
     public TimerView (JLabel label) {
         this.minutes = 0;
         this.startTime = 0;
-        this.endTime = 3000;
+        this.endTime = 300;
         this.label = label;
     }
 
