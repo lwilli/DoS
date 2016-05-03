@@ -18,6 +18,7 @@ public class GameState implements java.io.Serializable {
    private List<Unit> activeUnits;
    private int playerHealth;
    private int difficulty;
+   public ClickCounter clickCounter;
 
    /** Default constructor. */
    public GameState() {
@@ -26,6 +27,7 @@ public class GameState implements java.io.Serializable {
       activeUnits = new ArrayList<Unit>();
       playerHealth = MAX_HEALTH;
       difficulty = 0;
+      clickCounter = new ClickCounter();
    }
 
    /**
