@@ -18,6 +18,7 @@ public class GameState implements java.io.Serializable {
    private List<Unit> activeUnits;
    private int playerHealth;
    private int difficulty;
+   private boolean active;
    public ClickCounter clickCounter;
 
    /** Default constructor. */
@@ -27,6 +28,7 @@ public class GameState implements java.io.Serializable {
       activeUnits = new ArrayList<Unit>();
       playerHealth = MAX_HEALTH;
       difficulty = 0;
+      active = false;
       clickCounter = new ClickCounter();
    }
 
@@ -48,7 +50,7 @@ public class GameState implements java.io.Serializable {
       }
       else {
          throw new IllegalArgumentException(
-          "New wave number must be between 1-10 (inclusive). Given: " + newWaveNum);
+               "New wave number must be between 1-10 (inclusive). Given: " + newWaveNum);
       }
    }
 
@@ -104,9 +106,25 @@ public class GameState implements java.io.Serializable {
       }
       else {
          throw new IllegalArgumentException(
-          "New health must be between 0 and " + MAX_HEALTH + 
-          " (inclusive). Given: " + newHealth);
+               "New health must be between 0 and " + MAX_HEALTH + 
+               " (inclusive). Given: " + newHealth);
       }
+   }
+
+   /**
+    * Sets the game as paused or unpaused.
+    * @param active If true, the game will be set to active.
+    */
+   public void setGameActive(boolean active) {
+      this.active = active;
+   }
+
+   /**
+    * Determines if the game is in an active or paused state.
+    * @return True if the game is active; false if the game is paused.
+    */
+   public boolean isActive() {
+      return this.active;
    }
 
 
