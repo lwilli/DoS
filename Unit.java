@@ -2,7 +2,9 @@ import java.util.List;
 
 public abstract class Unit implements java.io.Serializable {
    /** Enum to represent the two types of Units: Defend and Attack units. */
-   enum UnitType {Defend, Attack};
+   enum UnitType {Defend, Attack, Player};
+
+   private final static int DEFAULT_RANGE = 1000;
    
    private int id;
    private int positionX;
@@ -26,7 +28,7 @@ public abstract class Unit implements java.io.Serializable {
       attackStrength = 1;
       defenseStrength = 1;
       attackSpeed = 1;
-      range = 10;
+      range = DEFAULT_RANGE;
    }
 
    /** Creates a Unit with the given fields. */
@@ -156,7 +158,8 @@ public abstract class Unit implements java.io.Serializable {
 
 
    /**
-    * Find the unit nearest opponent unit to this.
+    * Find the unit nearest opponent unit to this, unless this unit is an attacker
+    * and the base is in range, then return base.
     * @param units The list of active opponent units.
     * @return The nearest opposing unit or null if none.
     */
@@ -165,11 +168,15 @@ public abstract class Unit implements java.io.Serializable {
          return null;
       }
 
-      double closestDist = distanceToUnit(units.get(0));
-      Unit closestUnit = units.get(0);
+      double closestDist = Integer.MAX_VALUE;
+      Unit closestUnit = null;
+
       for (Unit unit : units) {
          double thisDist = distanceToUnit(unit);
-         if (thisDist < closestDist) {
+         if (unit.type == UnitType.Player && thisDist < closestDist) {
+            return unit;
+         }
+         if (thisDist < this.range && thisDist < closestDist) {
             closestUnit = unit;
             closestDist = thisDist;
          }
@@ -179,7 +186,8 @@ public abstract class Unit implements java.io.Serializable {
    }
 
 
-   /** Deals damage to the nearest opposing unit if there is one in range.
+   /** 
+    * Deals damage to the nearest opposing unit if there is one in range.
     * @param units The list of all active opponent units.
     * @return True if this unit was able to attack another unit; false otherwise.
     */
@@ -193,7 +201,7 @@ public abstract class Unit implements java.io.Serializable {
          return true;
       }
    }
-   
+
    /**
     * Moves this Unit to the given position if the coordinates are valid.
     * @param posXY A two-element int array containing the x and y coordinates for
