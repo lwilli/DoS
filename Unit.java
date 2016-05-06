@@ -1,9 +1,8 @@
+import java.util.List;
 
-
-/** Enum to represent the two types of Units: Defend and Attack units. */
-enum UnitType {Defend, Attack};
-
-public abstract class Unit {
+public abstract class Unit implements java.io.Serializable {
+   /** Enum to represent the two types of Units: Defend and Attack units. */
+   enum UnitType {Defend, Attack};
    
    private int id;
    private int positionX;
@@ -13,6 +12,7 @@ public abstract class Unit {
    private int unitHealthLeft;
    private int attackStrength;
    private int defenseStrength;
+   private int range;
    private double attackSpeed;   
    
    /** Default Unit constructor (probably shouldn't use). */
@@ -26,11 +26,12 @@ public abstract class Unit {
       attackStrength = 1;
       defenseStrength = 1;
       attackSpeed = 1;
+      range = 10;
    }
 
    /** Creates a Unit with the given fields. */
    public Unit(int id, int posX, int posY, UnitType type, int maxHealth, 
-    int attackStrength, int defenseStrength, double attackSpeed) {
+    int attackStrength, int defenseStrength, double attackSpeed, int range) {
       this.id = id;
       this.positionX = posX;
       this.positionY = posY;
@@ -40,6 +41,7 @@ public abstract class Unit {
       this.attackStrength = attackStrength;
       this.defenseStrength = defenseStrength;
       this.attackSpeed = attackSpeed;
+      this.range = range;
    }
    
    /** 
@@ -129,6 +131,7 @@ public abstract class Unit {
       }
    }
 
+
    /**
     * Deals damage from this Unit to the given Unit using the following algorithm:
     * Damage dealt = attacking unit's attackStrength / defending unit's defenseStrength
@@ -137,6 +140,58 @@ public abstract class Unit {
     */
    public int dealDamage(Unit target) {
       return target.takeDamage(this.attackStrength / target.defenseStrength);
+   }
+
+
+   /**
+    * Computes the Euclidean distance from this to the given unit.
+    * @param unit The unit to compute distance to.
+    * @return The distance to the unit as a double.
+    */
+   private double distanceToUnit(Unit unit) {
+      int pos[] = unit.getPosition();
+      return Math.sqrt(Math.pow(this.positionX - pos[0], 2) + 
+       (Math.pow(this.positionY - pos[1], 2)));
+   }
+
+
+   /**
+    * Find the unit nearest opponent unit to this.
+    * @param units The list of active opponent units.
+    * @return The nearest opposing unit or null if none.
+    */
+   private Unit nearestOpponentUnit(List<Unit> units) {
+      if (units.size() == 0) {
+         return null;
+      }
+
+      double closestDist = distanceToUnit(units.get(0));
+      Unit closestUnit = units.get(0);
+      for (Unit unit : units) {
+         double thisDist = distanceToUnit(unit);
+         if (thisDist < closestDist) {
+            closestUnit = unit;
+            closestDist = thisDist;
+         }
+      }
+
+      return closestUnit;
+   }
+
+
+   /** Deals damage to the nearest opposing unit if there is one in range.
+    * @param units The list of all active opponent units.
+    * @return True if this unit was able to attack another unit; false otherwise.
+    */
+   public boolean attackNearest(List<Unit> units) {
+      Unit nearestUnit = nearestOpponentUnit(units); 
+      if (nearestUnit == null) {
+         return false;
+      }
+      else {
+         this.dealDamage(nearestUnit);
+         return true;
+      }
    }
    
    /**
