@@ -3,7 +3,6 @@
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
 
 public class GameState implements java.io.Serializable {
 
@@ -14,18 +13,20 @@ public class GameState implements java.io.Serializable {
    private static final int MAX_WAVE_NUM = 10;
 
    private int waveNum;
-   private Timer roundTimeLeft;
-   private List<Unit> activeUnits;
+   private List<Unit> activeDefendUnits;
+   private List<Unit> activeAttackUnits;
    private int playerHealth;
    private int difficulty;
    private boolean active;
    public ClickCounter clickCounter;
+   public int roundTimeLeft; //**** Needs to be updated to proper timer class. ****
 
    /** Default constructor. */
    public GameState() {
       waveNum = 1;
-      roundTimeLeft = new Timer(); 
-      activeUnits = new ArrayList<Unit>();
+      roundTimeLeft = 0; // ******************************** 
+      activeDefendUnits = new ArrayList<Unit>();
+      activeAttackUnits = new ArrayList<Unit>();
       playerHealth = MAX_HEALTH;
       difficulty = 0;
       active = false;
@@ -55,37 +56,59 @@ public class GameState implements java.io.Serializable {
    }
 
    /**
-    * Gets the list of active units.
+    * Gets the list of active units of the given type.
+    * @param type The type of units to get (defend or attack).
     * @return The list of active units.
     */
-   public List<Unit> getActiveUnits() {
-      return activeUnits;
+   public List<Unit> getActiveUnits(Unit.UnitType type) {
+      if (type == Unit.UnitType.Defend) {
+         return activeDefendUnits;
+      }
+      else {
+         return activeAttackUnits;
+      }
    }
 
    /**
-    * Replaces the GameState's list of active units with the given list.
-    * @param newUnits The list of new active units.
+    * Replaces the GameState's list of active units of the same type
+    * with the given list.
+    * @param newUnits The (nonempty) list of new active units.
     */
    public void setActiveUnits(List<Unit> newUnits) {
-      activeUnits = newUnits;
+      if (newUnits.get(0).getType() == Unit.UnitType.Defend) {
+         activeDefendUnits = newUnits;
+      }
+      else {
+         activeAttackUnits = newUnits;
+      }
    }
 
    /**
-    * Removes the given Unit from the active list of units.
+    * Removes the given Unit from the active list.
     * @param unitToRemove The unit to remove from the list.
     * @return True if the unit was sucessfully removed.
     */
    public boolean removeActiveUnit(Unit unitToRemove) {
-      return activeUnits.remove(unitToRemove);
+      if (unitToRemove.getType() == Unit.UnitType.Defend) {
+         return activeDefendUnits.remove(unitToRemove);
+      }
+      else {
+         return activeAttackUnits.remove(unitToRemove);
+      }
    }
 
    /**
-    * Adds the given Unit to the list of active units.
+    * Adds the given Unit to the type-appropriate list of active units.
     * @param unitToAdd The unit to add to the list.
     * @return True if the Unit was successfully added.
     */
    public boolean addActiveUnit(Unit unitToAdd) {
-      return activeUnits.add(unitToAdd);
+      if (unitToAdd.getType() == Unit.UnitType.Defend) {
+         return activeDefendUnits.add(unitToAdd);
+      }
+      else {
+         return activeAttackUnits.add(unitToAdd);
+      }
    }
 
    /**
