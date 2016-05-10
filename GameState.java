@@ -108,6 +108,66 @@ public class GameState implements java.io.Serializable {
           " (inclusive). Given: " + newHealth);
       }
    }
-
+   
+   public void 
+   
+   /**
+   * Currency is encapsulated within it's own class so that it is more easily
+   * managable.
+   */
+   public class Currency {
+      private int defenderPlayerCurrency = 0;
+      private int attackerPlayerCurrency = 0;
+      
+      /**
+      * Constructor with the defender's currency
+      * @param initial starting currency
+      */
+      public Currency (int initialAmount) {
+         defenderPlayerCurrency = initialAmount;
+      }
+      
+      /**
+      * Constructor with the defender's and attacker's currency
+      * @param defender's currency
+      * @param attacker's currency
+      */
+      public Currency (int initialAmountDefender, int initialAmountAttacker) {
+         defenderPlayerCurrency = initialAmountDefender;
+         attackerPlayerCurrency = initialAmountAttacker;
+      }
+      
+      /**
+      * Changes the defender's currency
+      * @param adds this value to the defender's currency, can use negatives to subtract
+      */
+      public void changeDefenderCurrency(int change) {
+         defenderPlayerCurrency += change;
+      }
+      
+      /**
+      * Changes the attacker's currency
+      * @param adds this value to the attacker's currency, can use negatives to subtract
+      */
+      public void changeAttackerCurrency(int change) {
+         attackerPlayerCurrency += change;
+      }
+      
+      /**
+      * Gets the current amount of currency the defender has
+      * @return defender's currency
+      */
+      public int getDefenderCurrency() {
+         return defenderPlayerCurrency;
+      }
+      
+	   /**
+      * Gets the current amount of currency the attacker has
+      * @return attacker's currency
+	  */
+      public int getAttackerCurrency() {
+         return attackerPlayerCurrency;
+      }
+   }
 
 }
