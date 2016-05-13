@@ -4,7 +4,7 @@ public abstract class Unit implements java.io.Serializable {
    /** Enum to represent the two types of Units: Defend and Attack units. */
    enum UnitType {Defend, Attack, Player};
 
-   private final static int DEFAULT_RANGE = 1000;
+   private final static int DEFAULT_ATTACK_RANGE = 1000;
    
    private int id;
    private int positionX;
@@ -14,7 +14,7 @@ public abstract class Unit implements java.io.Serializable {
    private int unitHealthLeft;
    private int attackStrength;
    private int defenseStrength;
-   private int range;
+   private int attackRange;
    private double attackSpeed;   
    
    /** Default Unit constructor (probably shouldn't use). */
@@ -28,12 +28,13 @@ public abstract class Unit implements java.io.Serializable {
       attackStrength = 1;
       defenseStrength = 1;
       attackSpeed = 1;
-      range = DEFAULT_RANGE;
+      attackRange = DEFAULT_ATTACK_RANGE;
    }
 
    /** Creates a Unit with the given fields. */
    public Unit(int id, int posX, int posY, UnitType type, int maxHealth, 
-    int attackStrength, int defenseStrength, double attackSpeed, int range) {
+    int attackStrength, int defenseStrength, double attackSpeed, 
+    int attackRange) {
       this.id = id;
       this.positionX = posX;
       this.positionY = posY;
@@ -43,7 +44,7 @@ public abstract class Unit implements java.io.Serializable {
       this.attackStrength = attackStrength;
       this.defenseStrength = defenseStrength;
       this.attackSpeed = attackSpeed;
-      this.range = range;
+      this.attackRange = attackRange;
    }
    
    /** 
@@ -158,8 +159,8 @@ public abstract class Unit implements java.io.Serializable {
 
 
    /**
-    * Find the unit nearest opponent unit to this, unless this unit is an attacker
-    * and the base is in range, then return base.
+    * Find the unit nearest opponent unit to this, unless this unit is an 
+    * attacker and the base is in range, then return base.
     * @param units The list of active opponent units.
     * @return The nearest opposing unit or null if none.
     */
@@ -176,7 +177,7 @@ public abstract class Unit implements java.io.Serializable {
          if (unit.type == UnitType.Player && thisDist < closestDist) {
             return unit;
          }
-         if (thisDist < this.range && thisDist < closestDist) {
+         if (thisDist < this.attackRange && thisDist < closestDist) {
             closestUnit = unit;
             closestDist = thisDist;
          }
