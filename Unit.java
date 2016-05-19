@@ -1,6 +1,8 @@
 import java.util.List;
 
 public abstract class Unit implements java.io.Serializable {
+   protected static final long serialVersionUID = 1L;
+
    /** Enum to represent the two types of Units: Defend and Attack units. */
    enum UnitType {Defend, Attack, Player};
 
