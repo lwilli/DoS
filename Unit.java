@@ -143,7 +143,7 @@ public abstract class Unit implements java.io.Serializable {
     * @return The target unit's remaining health after the dealt damage.
     */
    public int dealDamage(Unit target) {
-      return target.takeDamage(this.attackStrength / target.defenseStrength);
+      return target.takeDamage((int)Math.round((double)this.attackStrength / (double)target.defenseStrength));
    }
 
 

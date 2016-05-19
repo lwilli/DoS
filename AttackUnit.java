@@ -10,7 +10,7 @@ public class AttackUnit extends Unit {
 
    /** Creates an AttackUnit with the given fields. */
    public AttackUnit(int id, int posX, int posY, int maxHealth, 
-    int attackStrength, int defenseStrength, double attackSpeed, 
+    double attackStrength, double defenseStrength, double attackSpeed, 
     int attackRange, int moveSpeed) {
 
       super(id, posX, posY, Unit.UnitType.Attack, maxHealth, attackStrength,
