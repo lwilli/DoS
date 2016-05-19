@@ -155,7 +155,7 @@ public class GameState implements java.io.Serializable {
     * Runs every unit's attackNearest.
     * @return True if running the attacks succeeded. 
     */
-   public static boolean runAllAttacks() {
+   public boolean runAllAttacks() {
       for (Unit d : activeDefendUnits) {
          d.attackNearest(activeAttackUnits);
       }
