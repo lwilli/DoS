@@ -3,7 +3,7 @@ import java.util.List;
 public abstract class Unit implements java.io.Serializable {
 
    /** Enum to represent the two types of Units: Defend and Attack units. */
-   enum UnitType {Defend, Attack, Player};
+   public enum UnitType {Defend, Attack, Player};
 
    private final static int DEFAULT_ATTACK_RANGE = 1000;
    
