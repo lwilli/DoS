@@ -5,17 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameState implements java.io.Serializable {
-
-   /** Max health to start the player at. */
-   private static final int MAX_HEALTH = 100;
-
    /** Max wave round number. */
    private static final int MAX_WAVE_NUM = 10;
 
    private int waveNum;
    private List<Unit> activeDefendUnits;
    private List<Unit> activeAttackUnits;
-   private int playerHealth;
+   private Player player;
    private int difficulty;
    private boolean active;
    public ClickCounter clickCounter;
@@ -27,7 +23,7 @@ public class GameState implements java.io.Serializable {
       roundTimeLeft = 0; // ******************************** 
       activeDefendUnits = new ArrayList<Unit>();
       activeAttackUnits = new ArrayList<Unit>();
-      playerHealth = MAX_HEALTH;
+      player = new Player();
       difficulty = 0;
       active = false;
       clickCounter = new ClickCounter();
@@ -108,29 +104,6 @@ public class GameState implements java.io.Serializable {
       }
       else {
          return activeAttackUnits.add(unitToAdd);
-      }
-   }
-
-   /**
-    * Returns the player's health.
-    * @return The player's health.
-    */
-   public int getPlayerHealth() {
-      return playerHealth;
-   }
-
-   /**
-    * Sets the player's health to the given value.
-    * @param newHealth The new health value.
-    */
-   public void setPlayerHealth(int newHealth) {
-      if (newHealth > 0 && newHealth < MAX_HEALTH) {
-         playerHealth = newHealth;
-      }
-      else {
-         throw new IllegalArgumentException(
-               "New health must be between 0 and " + MAX_HEALTH + 
-               " (inclusive). Given: " + newHealth);
       }
    }
 

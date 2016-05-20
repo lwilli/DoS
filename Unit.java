@@ -11,11 +11,11 @@ public abstract class Unit implements java.io.Serializable {
    private int positionX;
    private int positionY;
    private UnitType type;
-   private int unitMaxHealth;
-   private int unitHealthLeft;
-   private int attackStrength;
-   private int defenseStrength;
-   private int attackRange;
+   private double unitMaxHealth;
+   private double unitHealthLeft;
+   private double attackStrength;
+   private double defenseStrength;
+   private double attackRange;
    private double attackSpeed;   
    
    /** Default Unit constructor (probably shouldn't use). */
@@ -24,18 +24,18 @@ public abstract class Unit implements java.io.Serializable {
       positionX = 0;
       positionY = 0;
       type = null;
-      unitMaxHealth = 100;
+      unitMaxHealth = 100.0;
       unitHealthLeft = unitMaxHealth;
-      attackStrength = 1;
-      defenseStrength = 1;
+      attackStrength = 1.0;
+      defenseStrength = 1.0;
       attackSpeed = 1;
       attackRange = DEFAULT_ATTACK_RANGE;
    }
 
    /** Creates a Unit with the given fields. */
-   public Unit(int id, int posX, int posY, UnitType type, int maxHealth, 
-    int attackStrength, int defenseStrength, double attackSpeed, 
-    int attackRange) {
+   public Unit(int id, int posX, int posY, UnitType type, double maxHealth, 
+    double attackStrength, double defenseStrength, double attackSpeed, 
+    double attackRange) {
       this.id = id;
       this.positionX = posX;
       this.positionY = posY;
@@ -77,7 +77,7 @@ public abstract class Unit implements java.io.Serializable {
     * Gets the Unit's remaining health.
     * @return The Unit's remaining health.
     */
-   public int getUnitHealthLeft() {
+   public double getUnitHealthLeft() {
       return unitHealthLeft;
    }
 
@@ -85,15 +85,30 @@ public abstract class Unit implements java.io.Serializable {
     * Gets the Unit's maximum health.
     * @return The Unit's maximum health.
     */
-   public int getUnitMaxHealth() {
+   public double getUnitMaxHealth() {
       return unitMaxHealth;
+   }
+
+   /**
+    * Sets the unit's health to the given value.
+    * @param newHealth The new health value.
+    */
+   public void setUnitHealth(int newHealth) {
+      if (newHealth > 0 && newHealth < unitMaxHealth) {
+         unitHealthLeft = newHealth;
+      }
+      else {
+         throw new IllegalArgumentException(
+               "New health must be between 0 and " + unitMaxHealth + 
+               " (inclusive). Given: " + newHealth);
+      }
    }
    
    /**
     * Gets the Unit's attack strength.
     * @return The Unit's attack strength.
     */
-   public int getAttackStrength() {
+   public double getAttackStrength() {
       return attackStrength;
    }
 
@@ -101,7 +116,7 @@ public abstract class Unit implements java.io.Serializable {
     * Gets the Unit's defense strength.
     * @return The Unit's defense strength.
     */
-   public int getDefenseStrength() {
+   public double getDefenseStrength() {
       return defenseStrength;
    }
 
@@ -120,7 +135,7 @@ public abstract class Unit implements java.io.Serializable {
     * call to getUnitHealthLeft() after the takeDamage() call. 
     * Must be greater than 0 and less than or equal to Integer.MAX_VALUE.
     */
-   public int takeDamage(int damage) {
+   public double takeDamage(double damage) {
       if (damage < 0 || damage > Integer.MAX_VALUE) {
          throw new IllegalArgumentException("Damage amount must be greater than zero.");
       }
@@ -142,8 +157,8 @@ public abstract class Unit implements java.io.Serializable {
     * @param Unit The Unit to deal damage to.
     * @return The target unit's remaining health after the dealt damage.
     */
-   public int dealDamage(Unit target) {
-      return target.takeDamage((int)Math.round((double)this.attackStrength / (double)target.defenseStrength));
+   public double dealDamage(Unit target) {
+      return target.takeDamage(this.attackStrength / target.defenseStrength);
    }
 
 
