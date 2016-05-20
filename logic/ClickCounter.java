@@ -14,8 +14,9 @@
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.Serializable;
 
-public class ClickCounter extends MouseAdapter {
+public class ClickCounter extends MouseAdapter implements Serializable {
 
    private int numClicks;
 
