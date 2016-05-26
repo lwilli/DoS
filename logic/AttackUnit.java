@@ -29,9 +29,21 @@ public class AttackUnit extends Unit {
    /**
     * Moves this AttackUnit towards the opponent's base according to the
     * path and the unit's speed.
-    * 
     */
     public void advanceOnTower() {
-
+       // Not implemented
     }
+
+    /**
+     * Moves the unit by the given x and y coordinate offsets.
+     *
+     * @param xOffset The number to add to this unit's x coordinate position.
+     * @param yOffset The number to add to this unit's y coordinate position.
+     */
+    public void move(int xOffset, int yOffset) {
+      int newPos[] = {xOffset, yOffset};
+      this.setPosition(newPos);
+    }
+
+
 }
