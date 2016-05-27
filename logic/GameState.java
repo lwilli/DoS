@@ -128,8 +128,11 @@ public class GameState implements java.io.Serializable {
     * and removes the unit if its health is reduced to 0.
     * @param units The list of units to run attacks against their opponents.
     * @param unitType The type of unit the given list is made of.
+    * @return True if a unit was destroyed; false if not.
     */
-   private void runAttacks(List<Unit> units, UnitType unitType) {
+   private boolean runAttacks(List<Unit> units, Unit.UnitType unitType) {
+      boolean unitWasDestroyed = false;
+
       for (Unit unit : units) {
          Unit nearest = null;
          if (unitType == Unit.UnitType.Attack) {
@@ -142,19 +145,22 @@ public class GameState implements java.io.Serializable {
             unit.dealDamage(nearest);
             if (nearest.getUnitHealthLeft() <= 0) {
                removeActiveUnit(nearest);
-               // ****** BILL: Add destroy sound call here. ******* 
+               unitWasDestroyed = true;
             }
          }
       }
+
+      return unitWasDestroyed;
    }
 
    /**
     * Runs all the active units of both types attacks against the nearest
     * in-range opponent.
+    * @return True if a unit was destroyed; false if not.
     */
-   public void runAllAttacks() {
-      runAttacks(activeDefendUnits, Unit.UnitType.Defend);
-      runAttacks(activeAttackUnits, Unit.UnitType.Attack);
+   public boolean runAllAttacks() {
+      return runAttacks(activeDefendUnits, Unit.UnitType.Defend) &&
+       runAttacks(activeAttackUnits, Unit.UnitType.Attack);
    }
 
 }

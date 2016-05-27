@@ -180,7 +180,7 @@ public abstract class Unit implements java.io.Serializable {
     * @param units The list of active opponent units.
     * @return The nearest opposing unit or null if none.
     */
-   private Unit nearestOpponentUnit(List<Unit> units) {
+   public Unit nearestOpponentUnit(List<Unit> units) {
       if (units.size() == 0) {
          return null;
       }
