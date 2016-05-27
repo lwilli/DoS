@@ -3,7 +3,7 @@
     <useControls filename="nifty-default-controls.xml"/>
     <useStyles filename="nifty-default-styles.xml"/>
     <screen id="game_menu" defaultFocusElement="game_play" controller="DoS.GameMenuController">
-        <layer id="main_menu" childLayout="absolute" backgroundImage="/Users/MASTER/Desktop/staley2.png">
+        <layer id="main_menu" childLayout="absolute" backgroundImage="staley2.png">
             <control name="label" id="title" childLayout="overlay" width="183px" x="289" y="15" valign="center" text="DoS Defense of Staley" align="center" height="62px"/>
             <control name="button" id="game_play" childLayout="center" backgroundImage="button/button.png" x="565" width="150px" y="125" label="Play Game" height="50px" 
              visibleToMouse="true" >
