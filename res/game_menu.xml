@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<nifty xmlns="http://nifty-gui.lessvoid.com/nifty-gui">
+    <useControls filename="nifty-default-controls.xml"/>
+    <useStyles filename="nifty-default-styles.xml"/>
+    <screen id="game_menu" defaultFocusElement="game_play" controller="DoS.GameMenuController">
+        <layer id="main_menu" childLayout="absolute" backgroundImage="/Users/MASTER/Desktop/staley2.png">
+            <control name="label" id="title" childLayout="overlay" width="183px" x="289" y="15" valign="center" text="DoS Defense of Staley" align="center" height="62px"/>
+            <control name="button" id="game_play" childLayout="center" backgroundImage="button/button.png" x="565" width="150px" y="125" label="Play Game" height="50px" 
+             visibleToMouse="true" >
+             	<interact onClick="next()" />
+             </control>
+             
+            <control name="button" id="load_game" childLayout="center" x="565" width="150px" y="182" label="Load Game" height="50px"/>
+            <control name="button" id="Exit" childLayout="center" x="564" width="150px" y="237" label="Exit" height="50px"/>
+        </layer>
+    </screen>
+</nifty>
