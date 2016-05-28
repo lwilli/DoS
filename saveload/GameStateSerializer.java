@@ -12,7 +12,7 @@ import java.io.Serializable;
  * 
  * @author Alec James
  */
-class GameStateSerializer
+public class GameStateSerializer
 {
     /** Internal Game State. */
     private GameState state;
@@ -33,7 +33,7 @@ class GameStateSerializer
      * @return serialized game state
      * @throw IllegalArgumentException shouldn't
      */
-    public byte[] serialize() throws Exception
+    public byte[] serialize() throws IllegalArgumentException
     {
         try
         {

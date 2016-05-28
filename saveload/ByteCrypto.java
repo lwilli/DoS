@@ -15,7 +15,7 @@ import javax.crypto.spec.SecretKeySpec;
  * 
  * @author Alec James
  */
-class ByteCrypto
+public class ByteCrypto
 {
     /** Encryption standard used. */
     private final static String CRYPTO = "PBEwithMD5AndDES";

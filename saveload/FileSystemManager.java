@@ -11,7 +11,7 @@ import java.util.Scanner;
  * 
  * @author Alec James
  */
-class FileSystemManager
+public class FileSystemManager
 {
     /** Encryption/Decryption engine. */
     private ByteCrypto crypto;
@@ -32,6 +32,12 @@ class FileSystemManager
      */
     public FileSystemManager(String user, String pass)
     {
+        //don't allow empty Strings
+        if(user.equals("") || pass.equals(""))
+        {
+            throw new IllegalArgumentException();
+        }
+        
         //set up directories
         saveFileDir = System.getProperty("user.dir") + "/saves/"
                 + user + "/";
@@ -59,14 +65,13 @@ class FileSystemManager
         
         try
         {
-            //make a serializer and serialize the game
             byte[] game = new GameStateSerializer(state).serialize();
         
             //encrypt the serialized game
             String toSave = crypto.encrypt(game);
         
             //create the save file
-            File saveFile = new File(saveFileDir + saveFileName);
+            File saveFile = new File(saveFileDir + saveFileName + EXT);
             
             //did we overwrite?
             if(saveFile.exists())
@@ -100,7 +105,7 @@ class FileSystemManager
     public GameState loadFile(String toLoad) throws FileNotFoundException
     {
         //get the file to load
-        File saveToLoad = new File(saveFileDir + toLoad);
+        File saveToLoad = new File(saveFileDir + toLoad + EXT);
         
         //make a scanner from the file
         Scanner in = new Scanner(saveToLoad);
@@ -130,5 +135,16 @@ class FileSystemManager
     public String getSaveFileDir()
     {
         return saveFileDir;
+    }
+    
+    public static void main(String[] args) throws Exception
+    {
+        GameState g = new GameState();
+        g.setPlayerHealth(56);
+        
+        FileSystemManager fsm = new FileSystemManager("AlecJ", "MyPassword");
+        fsm.saveToFile("test", g);
+        GameState g2 = fsm.loadFile("test");
+        System.out.println(g2.getPlayerHealth());
     }
 }

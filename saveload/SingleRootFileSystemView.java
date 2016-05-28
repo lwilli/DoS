@@ -16,7 +16,7 @@ import javax.swing.filechooser.*;
  * @author someone on the internet
  *
  */
-class SingleRootFileSystemView extends FileSystemView {
+public class SingleRootFileSystemView extends FileSystemView {
 
     File root;
     File[] roots = new File[1];
