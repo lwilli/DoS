@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<nifty xmlns="http://nifty-gui.lessvoid.com/nifty-gui">
+    <useControls filename="nifty-default-controls.xml"/>
+    <useStyles filename="nifty-default-styles.xml"/>
+    <screen id="game_over" defaultFocusElement="" controller="DoS.GameMenuController">
+        <layer childLayout="absolute" backgroundImage="res/staley2.png">
+        	<text font="aurulent-sans-16.fnt"  color="#FF0000" text="Game Over!"
+        	x="350" y="150" align="center" valign="center" />
+            <control name="button" id="go_menu" childLayout="center"  x="125" width="150px" y="450" label="Restart Game" height="50px" 
+             visibleToMouse="true" />
+             <control name="button" id="go_quit" childLayout="center"  x="500" width="150px" y="450" label="Quit Game" height="50px" 
+             visibleToMouse="true" />
+        </layer>
+    </screen>
+</nifty>
