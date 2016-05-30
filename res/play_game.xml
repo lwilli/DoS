@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<nifty xmlns="http://nifty-gui.lessvoid.com/nifty-gui">
+    <useControls filename="nifty-default-controls.xml"/>
+    <useStyles filename="nifty-default-styles.xml"/>
+    <screen id="play_game" childLayout="center" defaultFocusElement="game_play" controller="DoS.GameMenuController" >
+    	
+        <layer id="game_map"  childLayout="absolute" backgroundImage="res/DoS_Map.jpg" >
+			<panel height="10px" width="800px"  y="65" backgroundColor="#FFFF"/>
+			<panel height="10px" width="800px"  y="535" backgroundColor="#FFFF"/>
+			
+			<panel id="hit_me" height="600" width="800px" y = "0"   backgroundColor="#FF0000" setVisible= "true"/>
+        </layer>
+    </screen>
+</nifty>
