@@ -1,3 +1,5 @@
+package logic;
+
 public class AttackUnit extends Unit {
 
    private double moveSpeed;

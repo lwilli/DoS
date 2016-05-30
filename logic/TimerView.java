@@ -1,3 +1,5 @@
+package logic;
+
 import oracle.jrockit.jfr.JFR;
 
 import java.awt.event.ActionEvent;

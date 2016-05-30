@@ -1,6 +1,9 @@
+package logic;
+
 /* Holds the game state variables. */
 
 import java.io.Serializable;
+import logic.ClickCounter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +15,6 @@ public class GameState implements java.io.Serializable {
    private List<Unit> activeDefendUnits;
    private List<Unit> activeAttackUnits;
    private Player player;
-   private int difficulty;
    private boolean active;
    public ClickCounter clickCounter;
    public int roundTimeLeft; //**** Needs to be updated to proper timer class. ****
@@ -24,7 +26,7 @@ public class GameState implements java.io.Serializable {
       activeDefendUnits = new ArrayList<Unit>();
       activeAttackUnits = new ArrayList<Unit>();
       player = new Player();
-      difficulty = 0;
+      this.addActiveUnit(player);
       active = false;
       clickCounter = new ClickCounter();
    }
@@ -57,7 +59,7 @@ public class GameState implements java.io.Serializable {
     * @return The list of active units.
     */
    public List<Unit> getActiveUnits(Unit.UnitType type) {
-      if (type == Unit.UnitType.Defend) {
+      if (type == Unit.UnitType.Defend || type == Unit.UnitType.Player) {
          return activeDefendUnits;
       }
       else {
@@ -71,7 +73,8 @@ public class GameState implements java.io.Serializable {
     * @param newUnits The (nonempty) list of new active units.
     */
    public void setActiveUnits(List<Unit> newUnits) {
-      if (newUnits.get(0).getType() == Unit.UnitType.Defend) {
+	  Unit.UnitType uType = newUnits.get(0).getType();
+      if (uType == Unit.UnitType.Defend || uType == Unit.UnitType.Player) {
          activeDefendUnits = newUnits;
       }
       else {
@@ -80,12 +83,16 @@ public class GameState implements java.io.Serializable {
    }
 
    /**
-    * Removes the given Unit from the active list.
+    * Removes the given Unit from the active list. You cannot remove
+    * the Player unit.
     * @param unitToRemove The unit to remove from the list.
     * @return True if the unit was sucessfully removed.
     */
    public boolean removeActiveUnit(Unit unitToRemove) {
-      if (unitToRemove.getType() == Unit.UnitType.Defend) {
+	  if (unitToRemove.getType() == Unit.UnitType.Player) {
+		  return false;
+	  }
+      else if (unitToRemove.getType() == Unit.UnitType.Defend) {
          return activeDefendUnits.remove(unitToRemove);
       }
       else {
@@ -99,7 +106,8 @@ public class GameState implements java.io.Serializable {
     * @return True if the Unit was successfully added.
     */
    public boolean addActiveUnit(Unit unitToAdd) {
-      if (unitToAdd.getType() == Unit.UnitType.Defend) {
+	  Unit.UnitType uType = unitToAdd.getType();
+      if (uType == Unit.UnitType.Defend || uType == Unit.UnitType.Player) {
          return activeDefendUnits.add(unitToAdd);
       }
       else {
@@ -159,8 +167,12 @@ public class GameState implements java.io.Serializable {
     * @return True if a unit was destroyed; false if not.
     */
    public boolean runAllAttacks() {
-      return runAttacks(activeDefendUnits, Unit.UnitType.Defend) &&
-       runAttacks(activeAttackUnits, Unit.UnitType.Attack);
+      boolean attackUnitDied, defendUnitDied;
+      
+      attackUnitDied = runAttacks(activeDefendUnits, Unit.UnitType.Defend);
+	  defendUnitDied = runAttacks(activeAttackUnits, Unit.UnitType.Attack);
+	  
+	  return attackUnitDied || defendUnitDied;
    }
 
 }

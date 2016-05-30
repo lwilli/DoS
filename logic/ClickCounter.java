@@ -1,3 +1,5 @@
+package logic;
+
 /* Class to count all clicks made.
  *
  * To use, just add a new mouse listener with the ClickCounter as the mouse 

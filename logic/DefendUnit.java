@@ -1,3 +1,5 @@
+package logic;
+
 public class DefendUnit extends Unit {
 
    /** Default DefendUnit constructor. */

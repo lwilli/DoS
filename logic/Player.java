@@ -1,3 +1,5 @@
+package logic;
+
 /** Represents the player/base tower. */
 
 public class Player extends Unit {
