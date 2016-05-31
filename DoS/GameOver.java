@@ -1,4 +1,4 @@
-package DoS;
+package dos;
 
 import org.bushe.swing.event.EventTopicSubscriber;
 import org.newdawn.slick.GameContainer;

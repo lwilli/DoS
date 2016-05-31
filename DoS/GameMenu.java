@@ -29,7 +29,6 @@ import java.awt.Font;
 public class GameMenu extends BasicGameState  {
 	public static final String MOUSE ="No input yet";
 
-	public Image staley;
 	private Nifty nifty;
 	public static final int STALEYX = 200;
 	public static final int STALEYY = 150;

@@ -1,4 +1,4 @@
-package DoS;
+package dos;
 
 import org.newdawn.slick.*;
 import de.lessvoid.nifty.slick2d.NiftyStateBasedGame;

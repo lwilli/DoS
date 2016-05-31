@@ -1,4 +1,4 @@
-package DoS;
+package dos;
 
 import java.util.logging.Logger;
 

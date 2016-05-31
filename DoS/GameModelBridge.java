@@ -1,4 +1,4 @@
-package DoS;
+package dos;
 
 import Model.AttackUnit;
 import Model.DefendUnit;
