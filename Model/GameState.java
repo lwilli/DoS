@@ -70,7 +70,7 @@ public class GameState implements java.io.Serializable {
     * @param newUnits The (nonempty) list of new active units.
     */
    public void setActiveUnits(List<Unit> newUnits) {
-      if (newUnits.get(0).getType() == Unit.UnitType.Defend) {
+      if (newUnits.get(0).getType() == Unit.UnitType.DEFEND) {
          activeDefendUnits = newUnits;
       }
       else {
@@ -84,7 +84,7 @@ public class GameState implements java.io.Serializable {
     * @return True if the unit was sucessfully removed.
     */
    public boolean removeActiveUnit(Unit unitToRemove) {
-      if (unitToRemove.getType() == Unit.UnitType.Defend) {
+      if (unitToRemove.getType() == Unit.UnitType.DEFEND) {
          return activeDefendUnits.remove(unitToRemove);
       }
       else {
@@ -98,7 +98,7 @@ public class GameState implements java.io.Serializable {
     * @return True if the Unit was successfully added.
     */
    public boolean addActiveUnit(Unit unitToAdd) {
-      if (unitToAdd.getType() == Unit.UnitType.Defend) {
+      if (unitToAdd.getType() == Unit.UnitType.DEFEND) {
          return activeDefendUnits.add(unitToAdd);
       }
       else {
