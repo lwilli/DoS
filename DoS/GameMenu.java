@@ -3,28 +3,19 @@ package DoS;
 
 import org.lwjgl.input.Mouse;
 
-import org.lwjgl.opengl.XRandR.Screen;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
-import de.lessvoid.nifty.builder.LayerBuilder;
 import de.lessvoid.nifty.builder.PanelBuilder;
 import de.lessvoid.nifty.builder.PopupBuilder;
-import de.lessvoid.nifty.builder.ScreenBuilder;
 import de.lessvoid.nifty.controls.ButtonClickedEvent;
 import de.lessvoid.nifty.controls.button.builder.ButtonBuilder;
 import de.lessvoid.nifty.controls.label.builder.LabelBuilder;
 import de.lessvoid.nifty.elements.Element;
-import de.lessvoid.nifty.elements.events.NiftyMousePrimaryClickedEvent;
 import de.lessvoid.nifty.nulldevice.NullSoundDevice;
 import de.lessvoid.nifty.renderer.lwjgl.input.LwjglInputSystem;
-import de.lessvoid.nifty.renderer.lwjgl.render.LwjglRenderDevice;
-import de.lessvoid.nifty.screen.ScreenController;
-import de.lessvoid.nifty.slick2d.NiftyBasicGame;
-import de.lessvoid.nifty.slick2d.NiftyOverlayBasicGameState;
-import de.lessvoid.nifty.slick2d.NiftyOverlayGameState;
 import de.lessvoid.nifty.slick2d.input.PlainSlickInputSystem;
 import de.lessvoid.nifty.slick2d.input.SlickInputSystem;
 import de.lessvoid.nifty.slick2d.render.SlickRenderDevice;
@@ -41,10 +32,12 @@ public class GameMenu extends BasicGameState  {
 
 	public Image staley;
 	private Nifty nifty;
-	public int staleyX = 200;
-	public int staleyY = 150;
+	public static final int staleyX = 200;
+	public static final int staleyY = 150;
+   public static final String labelWidth = "100px";
+   public static final String labelHeight = "25px"
 	public UnicodeFont font;
-	private boolean quit_game = false;
+	private boolean quitGame = false;
 	private Rectangle playButton = new Rectangle(275, 350, 100 ,50);
 	private Element exit;
 	private GradientFill healthFill = new GradientFill(0, playButton.getHeight(), Color.red, 
@@ -82,8 +75,8 @@ public class GameMenu extends BasicGameState  {
 	             style("nifty-panel-bright");
 	             childLayoutVertical(); 
 	             control(new LabelBuilder() {{
-	            	 width("100px");                        
-		             height("25px");
+	            	 width(labelWidth);                        
+		             height(labelHeight);
 		             label("Are you sure?");
 		             color("#B0171F");
 	             }});
@@ -91,14 +84,14 @@ public class GameMenu extends BasicGameState  {
 		                childLayoutHorizontal();                                                       
 		                control(new ButtonBuilder("yes_quit", "YES") {{
 		                	childLayoutCenter();
-		                	width("100px");                        
-			                height("25px");
+		                	width(labelWidth);                        
+			                height(labelHeight);
 		                }});
 		                panel(new PanelBuilder() {{ width("10px"); }});
 		                control(new ButtonBuilder("no_quit", "NO") {{
 		                	childLayoutCenter();
-		                	width("100px");                        
-			                height("25px");
+		                	width(labelHeight);                        
+			                height(labelHeight);
 		                }});
 		            }});
 	         }});
@@ -107,12 +100,6 @@ public class GameMenu extends BasicGameState  {
 	   
 	  
 	    exit = nifty.createPopup("exit_game");
-		//staley = new Image("res/staley.jpg");
-		//font = getNewFont("Arial" , 16);
-		//text = new TextField(gc, font, 50, 100, 120, 60);
-	    
-	    
-	    //System.out.println("is visible " + exit.isVisibleToMouseEvents());
 	}
 	
 	@NiftyEventSubscriber(id="resume_game")
@@ -128,11 +115,6 @@ public class GameMenu extends BasicGameState  {
        
 		/*For reference only just checks mouse position */
 		gr.drawString(mouse, 50, 50);
-		//gr.drawRect(50, 100, 60, 120); //x y , width, height
-	
-		//gr.drawString("Do you want to defeat me?", 80, 80);
-		
-		//gr.fill(playButton, healthFill);
 		
 	}
 	
@@ -147,20 +129,7 @@ public class GameMenu extends BasicGameState  {
 		healthFill.setStartColor(Color.red);
 		
 		mouse = "Mouse position x: " + xpos + " y : " + ypos;
-		
-		//System.out.println(mouse);
-		/*if (input.isKeyDown(Input.KEY_DOWN)) {
-			staleyY += 1;
-		}
-		if (input.isKeyDown(Input.KEY_UP)) {
-			staleyY -= 1;
-		}
-		if (input.isKeyDown(Input.KEY_LEFT)) {
-			staleyX -= 1;
-		}
-		if (input.isKeyDown(Input.KEY_RIGHT)) {
-			staleyX += 1;
-		}*/
+      
 		/* Play Game */
 		if((xpos  > 566 && xpos < 715) && (ypos < 475 && ypos > 425)) {
 			
@@ -192,27 +161,24 @@ public class GameMenu extends BasicGameState  {
 		/* Quit Game Functionality 
 		 Just exits the game 
 		 */
-		if((xpos  > 566 && xpos < 713) && (ypos < 305 && ypos > 260)) {
-	
-			if (input.isMouseButtonDown(0)) {
+		if((xpos  > 566 && xpos < 713) && (ypos < 305 && ypos > 260) && input.isMouseButtonDown(0)) {
 				System.out.println("Quit Game");
 				nifty.showPopup(nifty.getCurrentScreen(), exit.getId(), null);
-				quit_game = true;
-			}		
+				quitGame = true;
 		}
 	
-		if( input.isMouseButtonDown(0) && quit_game == true 
+		if(input.isMouseButtonDown(0) && quitGame 
 				&& (xpos  > 279 && xpos < 381) && (ypos < 305 && ypos > 275)) {
 			System.out.println("Yes");
 			nifty.closePopup(exit.getId());
 			gc.exit();	
 		}
 		
-		if( input.isMouseButtonDown(0) && quit_game == true && (xpos  > 390 && xpos < 491) && (ypos < 305 && ypos > 275))
+		if(input.isMouseButtonDown(0) && quitGame && (xpos  > 390 && xpos < 491) && (ypos < 305 && ypos > 275))
 				 {
 			System.out.println("No");
 			nifty.closePopup(exit.getId());
-			quit_game = false;
+			quitGame = false;
 		}
 	}
 		
@@ -224,8 +190,7 @@ public class GameMenu extends BasicGameState  {
     {
         font = new UnicodeFont(new Font(fontName , Font.PLAIN , fontSize));
         font.addGlyphs("@");
-        //font.getEffects().add(new ColorEffect(java.awt.Color.white));
-        return (font);
+        return font;
     }
 
 
