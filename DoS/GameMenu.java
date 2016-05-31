@@ -35,7 +35,7 @@ public class GameMenu extends BasicGameState  {
 	public static final int staleyX = 200;
 	public static final int staleyY = 150;
    public static final String labelWidth = "100px";
-   public static final String labelHeight = "25px"
+   public static final String labelHeight = "25px";
 	public UnicodeFont font;
 	private boolean quitGame = false;
 	private Rectangle playButton = new Rectangle(275, 350, 100 ,50);
