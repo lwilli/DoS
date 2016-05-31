@@ -160,4 +160,10 @@ public class GameState implements java.io.Serializable {
 	   
 	   return false;
    }
+   
+   @Override
+   public int hashCode() {
+	return 0;
+	   
+   }
 }
