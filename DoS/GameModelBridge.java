@@ -12,22 +12,28 @@ public class GameModelBridge {
 	private GameState gs;
 	private int defCount = 0;
 	private int atkCount = 0;
+	private int endOfScreen = 0;
 
-	public GameModelBridge() {
+	public GameModelBridge(int end) {
 		gs = new GameState();
+		endOfScreen = end;
 	}
 
 	/**
 	 * Contains the primary logic of the game, such as movement and attacks
 	 */
-	public void gameLoop() {
+	public int gameLoop() {
 	   Set<Unit> deadUnits = new HashSet<Unit>();
+	   int state = 0;
 		gs.runAllAttacks();
 		List<Unit> atkUnits = gs.getActiveUnits(Unit.UnitType.Attack);
 		for (Unit atk: atkUnits) {
 			if (atk.getUnitHealthLeft() <= 0) {
 			   deadUnits.add(atk);
-			   //PlaySountHere
+			   state |= 1;
+			} else if (atk.getPosition()[0] > endOfScreen) {
+            deadUnits.add(atk);
+			   state |= 2;
 			} else {
 			   int[] newPos = atk.getPosition();
 			   newPos[0] += 1;
@@ -37,7 +43,7 @@ public class GameModelBridge {
 		}
 		
 		atkUnits.removeAll(deadUnits);
-		
+		return state;
 	}
 
 	/**
@@ -83,3 +89,4 @@ public class GameModelBridge {
    }
 	
 }
+
