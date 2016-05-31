@@ -31,11 +31,11 @@ public class PlayGame extends BasicGameState{
 	private boolean gamePause = false;
 	private GameModelBridge gmb;
 	private Element pause_game;
-   private Sound wait_min;
-   private Sound pause_sound;
-   private Sound resume_sound;
-   private Sound oh_yes;
-   private Sound dammit;
+        private Sound wait_min;
+        private Sound pause_sound;
+        private Sound resume_sound;
+        private Sound oh_yes;
+        private Sound dammit;
 	private Nifty nifty;
 	
 	private int seconds;
