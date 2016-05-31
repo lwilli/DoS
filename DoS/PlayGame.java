@@ -96,8 +96,8 @@ public class PlayGame extends BasicGameState{
 		wait_min = new Sound("res/Wait a Minute.wav");
 		pause_sound = new Sound("res/Pause, Think About That.wav");
 		resume_sound = new Sound("res/Coming Back from a Pause.wav");
-	   oh_yes = new Sound("res/Oh Yes.wav");
-	   dammit = new Sound("res/Dammit.wav");
+	   	oh_yes = new Sound("res/Oh Yes.wav");
+	   	dammit = new Sound("res/Dammit.wav");
 		gmb = new GameModelBridge(800);
 	}
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics gr) throws SlickException {
