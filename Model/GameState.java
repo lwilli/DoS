@@ -3,7 +3,9 @@ package Model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import Model.Unit.UnitType;
 
 public class GameState implements java.io.Serializable {
    /** Max wave round number. */
@@ -13,18 +15,15 @@ public class GameState implements java.io.Serializable {
    private List<Unit> activeDefendUnits;
    private List<Unit> activeAttackUnits;
    private Player player;
-   private int difficulty;
    private boolean active;
-   public int roundTimeLeft; //**** Needs to be updated to proper timer class. ****
 
    /** Default constructor. */
    public GameState() {
       waveNum = 1;
-      roundTimeLeft = 0; // ******************************** 
       activeDefendUnits = new ArrayList<Unit>();
       activeAttackUnits = new ArrayList<Unit>();
       player = new Player();
-      difficulty = 0;
+      this.addActiveUnit(player);
       active = false;
    }
 
@@ -56,7 +55,7 @@ public class GameState implements java.io.Serializable {
     * @return The list of active units.
     */
    public List<Unit> getActiveUnits(Unit.UnitType type) {
-      if (type == Unit.UnitType.DEFEND) {
+      if (type == Unit.UnitType.DEFEND || type == Unit.UnitType.PLAYER) {
          return activeDefendUnits;
       }
       else {
@@ -70,7 +69,8 @@ public class GameState implements java.io.Serializable {
     * @param newUnits The (nonempty) list of new active units.
     */
    public void setActiveUnits(List<Unit> newUnits) {
-      if (newUnits.get(0).getType() == Unit.UnitType.DEFEND) {
+	  Unit.UnitType uType = newUnits.get(0).getType();
+      if (uType == Unit.UnitType.DEFEND || uType == Unit.UnitType.PLAYER) {
          activeDefendUnits = newUnits;
       }
       else {
@@ -79,12 +79,16 @@ public class GameState implements java.io.Serializable {
    }
 
    /**
-    * Removes the given Unit from the active list.
+    * Removes the given Unit from the active list. You cannot remove
+    * the Player unit.
     * @param unitToRemove The unit to remove from the list.
-    * @return True if the unit was sucessfully removed.
+    * @return True if the unit was successfully removed.
     */
    public boolean removeActiveUnit(Unit unitToRemove) {
-      if (unitToRemove.getType() == Unit.UnitType.DEFEND) {
+	  if (unitToRemove.getType() == Unit.UnitType.PLAYER) {
+		  return false;
+	  }
+      else if (unitToRemove.getType() == Unit.UnitType.DEFEND) {
          return activeDefendUnits.remove(unitToRemove);
       }
       else {
@@ -98,7 +102,8 @@ public class GameState implements java.io.Serializable {
     * @return True if the Unit was successfully added.
     */
    public boolean addActiveUnit(Unit unitToAdd) {
-      if (unitToAdd.getType() == Unit.UnitType.DEFEND) {
+	  Unit.UnitType uType = unitToAdd.getType();
+      if (uType == Unit.UnitType.DEFEND || uType == Unit.UnitType.PLAYER) {
          return activeDefendUnits.add(unitToAdd);
       }
       else {
@@ -127,14 +132,32 @@ public class GameState implements java.io.Serializable {
     * Runs every unit's attackNearest.
     * @return True if running the attacks succeeded. 
     */
-   public boolean runAllAttacks() {
+   public void runAllAttacks() {
       for (Unit d : activeDefendUnits) {
          d.attackNearest(activeAttackUnits);
       }
       for (Unit a : activeAttackUnits) {
          a.attackNearest(activeDefendUnits);
       }
-      return true;
    }
 
+   @Override
+   public boolean equals(Object other) {
+	   if (other == null || !(other instanceof GameState)) {
+	         return false;
+	   }
+	   GameState otherGS = (GameState)other;
+	   
+	   if (this.waveNum == otherGS.getWaveNum() && 
+		       this.active == otherGS.isActive()) {
+		   if (Arrays.deepEquals(this.activeAttackUnits.toArray(), 
+				   otherGS.getActiveUnits(UnitType.ATTACK).toArray()) &&
+		       Arrays.deepEquals(this.activeDefendUnits.toArray(), 
+				   otherGS.getActiveUnits(UnitType.DEFEND).toArray())) {
+			   return true;
+		   }
+	   }
+	   
+	   return false;
+   }
 }

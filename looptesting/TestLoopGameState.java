@@ -39,7 +39,7 @@ public class TestLoopGameState {
 	 */
 	public void TestRunAllAttacksTwoLoops() {
 		GameState state = new GameState();
-		AttackUnit attacker = new AttackUnit(1, new int[] {5, 5}, 10.0, 3.0, 1.0, 1.0, 1.0);
+		AttackUnit attacker = new AttackUnit(1, new int[] {5, 5}, 10.0, 3.0, 1.0, 1.0);
 		if (state.addActiveUnit(attacker) != true) {
 			System.out.println("ERROR: failed to add active unit of type Attack.");
 		}
@@ -58,9 +58,9 @@ public class TestLoopGameState {
 	 */
 	public void TestRunAllAttacksSevenLoops() {
 		GameState state = new GameState();
-		AttackUnit attacker1 = new AttackUnit(1, new int[] {25, 45}, 10.0, 3.0, 1.0, 1.0, 0.1);
-		AttackUnit attacker2 = new AttackUnit(2, new int[] {51, 55}, 10.0, 3.0, 1.0, 1.0, 0.1);
-		AttackUnit attacker3 = new AttackUnit(3, new int[] {35, 45}, 10.0, 3.0, 1.0, 1.0, 0.1);
+		AttackUnit attacker1 = new AttackUnit(1, new int[] {25, 45}, 10.0, 3.0, 1.0, 0.1);
+		AttackUnit attacker2 = new AttackUnit(2, new int[] {51, 55}, 10.0, 3.0, 1.0, 0.1);
+		AttackUnit attacker3 = new AttackUnit(3, new int[] {35, 45}, 10.0, 3.0, 1.0, 0.1);
 		
 		state.addActiveUnit(attacker1);
 		state.addActiveUnit(attacker2);
@@ -80,8 +80,6 @@ public class TestLoopGameState {
 		expectedAttackers.add(attacker1);
 		expectedAttackers.add(attacker2);
 		expectedAttackers.add(attacker3);
-		System.out.println("attackers: " + expectedAttackers);
-		System.out.println("results:   " + state.getActiveUnits(UnitType.ATTACK));
 		assertTrue(Arrays.deepEquals(expectedAttackers.toArray(), 
 				   state.getActiveUnits(UnitType.ATTACK).toArray()));
 		
