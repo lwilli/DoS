@@ -1,4 +1,5 @@
-package Model;
+package logic;
+
 import java.util.List;
 
 public abstract class Unit implements java.io.Serializable {
@@ -94,9 +95,9 @@ public abstract class Unit implements java.io.Serializable {
     * Sets the unit's health to the given value.
     * @param newHealth The new health value.
     */
-   public void setUnitHealth(int newHealth) {
-      if (newHealth > 0 && newHealth < unitMaxHealth) {
-         unitHealthLeft = newHealth;
+   public void setUnitHealth(double newHealth) {
+      if (newHealth > 0.0 && newHealth <= unitMaxHealth) {
+         this.unitHealthLeft = newHealth;
       }
       else {
          throw new IllegalArgumentException(
@@ -141,7 +142,7 @@ public abstract class Unit implements java.io.Serializable {
          throw new IllegalArgumentException("Damage amount must be greater than zero.");
       }
       else {
-         if (unitHealthLeft != 0) {
+         if (unitHealthLeft > 0) {
             unitHealthLeft -= damage;
             if (unitHealthLeft < 0) {
                unitHealthLeft = 0;
@@ -159,7 +160,7 @@ public abstract class Unit implements java.io.Serializable {
     * @return The target unit's remaining health after the dealt damage.
     */
    public double dealDamage(Unit target) {
-      return target.takeDamage(this.attackStrength / target.defenseStrength);
+	  return target.takeDamage(this.attackStrength / target.defenseStrength);
    }
 
 
@@ -177,11 +178,11 @@ public abstract class Unit implements java.io.Serializable {
 
    /**
     * Find the unit nearest opponent unit to this, unless this unit is an 
-    * attacker and the base is in range, then return base.
+    * attacker and the Player is in range, then return Player.
     * @param units The list of active opponent units.
     * @return The nearest opposing unit or null if none.
     */
-   private Unit nearestOpponentUnit(List<Unit> units) {
+   public Unit nearestOpponentUnit(List<Unit> units) {
       if (units.size() == 0) {
          return null;
       }
@@ -191,10 +192,10 @@ public abstract class Unit implements java.io.Serializable {
 
       for (Unit unit : units) {
          double thisDist = distanceToUnit(unit);
-         if (unit.type == UnitType.Player && thisDist < closestDist) {
+         if (unit.type == UnitType.Player && thisDist <= this.attackRange) {
             return unit;
          }
-         if (thisDist < this.attackRange && thisDist < closestDist) {
+         if (thisDist <= this.attackRange && thisDist < closestDist) {
             closestUnit = unit;
             closestDist = thisDist;
          }
@@ -238,4 +239,36 @@ public abstract class Unit implements java.io.Serializable {
          return true;
       }
    }
+   
+   @Override
+   public boolean equals(Object other) {
+	  if (other == null || !(other instanceof Unit)) {
+         return false;
+	  }
+	  
+	  Unit otherU = (Unit)other;
+	  if (otherU.id != this.id ||
+		  otherU.positionX != this.positionX ||
+          otherU.positionY != this.positionY ||
+	      otherU.type != this.type  ||
+   		  otherU.unitMaxHealth != this.unitMaxHealth ||
+		  otherU.unitHealthLeft != this.unitHealthLeft || 
+		  otherU.attackStrength != this.attackStrength ||
+		  otherU.defenseStrength != this.defenseStrength ||
+		  otherU.attackRange != this.attackRange ||
+		  otherU.attackSpeed != this.attackSpeed) {
+         return false;  
+	  }
+	  
+	  return true;
+   }
+   
+   @Override
+   public String toString() {
+	   return "id: " + this.id + ", position: [" + this.positionX + "," + this.positionY +
+			   "], type: " + this.type + ", maxHealth: " + this.unitMaxHealth + ", healthLeft: " + 
+			   this.unitHealthLeft + ", attackStrength: " + this.attackStrength + ", defenseStrength: " +
+			   this.defenseStrength + ", attackRange: " + this.attackRange + ", attackSpeed: " + this.attackSpeed;
+   }
+   
 }
