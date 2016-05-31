@@ -1,14 +1,10 @@
 
 package unittesting;
 
-import java.io.File;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
 import saveload.FileSystemManager;
-import saveload.GameState;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
@@ -17,6 +13,10 @@ import static org.junit.Assert.*;
  * @author Alec James
  */
 public class FileSystemManagerTest {
+    
+    /** Logger. */
+    private static final Logger log = 
+        Logger.getLogger(FileSystemManagerTest.class.getName());
     
     @Test
     public void TestGetSaveFileDirHasUsername()
@@ -44,7 +44,7 @@ public class FileSystemManagerTest {
         }
         catch(Exception ex)
         {
-            //pass
+            log.log(Level.INFO, "passed test", ex);
         }
     }
 }

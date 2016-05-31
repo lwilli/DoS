@@ -5,10 +5,12 @@
  */
 package integrationtesting;
 
+import saveload.GameState;
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.Test;
 import saveload.FileSystemManager;
-import saveload.GameState;
 import static org.junit.Assert.*;
 
 /**
@@ -17,6 +19,10 @@ import static org.junit.Assert.*;
  * @author Alec James
  */
 public class FileSystemManagerTest {
+    
+    /** Test logger. */
+    private static final Logger log = 
+        Logger.getLogger(FileSystemManagerTest.class.getName());
     
     @Test
     public void TestSaveToFileFileExistence()
@@ -33,14 +39,15 @@ public class FileSystemManagerTest {
         try
         {
             GameState g = new GameState();
-            g.setPlayerHealth(99);
+            g.setGameActive(true);
             FileSystemManager m = new FileSystemManager("Falessi", "Kobe");
             m.saveToFile("mygame", g);
             g = m.loadFile("mygame");
-            assertEquals(g.getPlayerHealth(), 99);
+            assertTrue(g.isActive());
         }
         catch(Exception ex)
         {
+            log.log(Level.SEVERE, "Test failure");
             fail();
         }
     }

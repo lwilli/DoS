@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Scanner;
+import saveload.ByteCrypto;
+import saveload.GameStateSerializer;
 
 /**
  * FileSystemManager saves Game states to files, and loads Game states from
@@ -49,7 +51,7 @@ public class FileSystemManager
         }
         catch(Exception ex)
         {
-            //dammit.
+            throw new IllegalArgumentException(ex);
         }
         
         //create save file directories

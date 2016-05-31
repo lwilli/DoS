@@ -1,13 +1,9 @@
 
 package unittesting;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import saveload.GameState;
 import saveload.GameStateSerializer;
+import saveload.GameState;
+import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**

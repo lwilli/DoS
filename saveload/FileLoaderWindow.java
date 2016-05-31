@@ -7,6 +7,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileSystemView;
+import saveload.SingleRootFileSystemView;
 
 /**
  * FileLoaderWindow is a GUI wrapper for FileSystemManager that handles saving
@@ -84,7 +85,7 @@ public class FileLoaderWindow
         //on a caught exception, display an error
         catch(Exception ex)
         {
-            log.log(Level.SEVERE, "Crypto error!");
+            log.log(Level.SEVERE, "Crypto error!", ex);
             JOptionPane.showMessageDialog(msgFrame,
                 "Error: cannot save file",
                 "Error",
@@ -131,7 +132,7 @@ public class FileLoaderWindow
         }
         catch(Exception ex)
         {
-            log.log(Level.SEVERE, "Crypto Error!");
+            log.log(Level.SEVERE, "Crypto Error!", ex);
             JFrame frame = new JFrame();
             JOptionPane.showMessageDialog(frame,
                 "Error: cannot load file",

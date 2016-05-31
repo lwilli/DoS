@@ -28,7 +28,7 @@ public class ByteCrypto
         (byte)0xEF, (byte)0x23, (byte)0x19, (byte)0x67, (byte)0x54 };
     
     /** number of iterations. */
-    private static final int iters = 4;
+    private static final int ITERS = 4;
     
     /**
      * Constructor. Generates a key based on the user's password.
@@ -47,7 +47,7 @@ public class ByteCrypto
                 .generateSecret(new PBEKeySpec(hashPass));
         
             //set paramters
-            PBEParameterSpec params = new PBEParameterSpec(salt, iters);
+            PBEParameterSpec params = new PBEParameterSpec(salt, ITERS);
         
             //set up encryption/decryption engines
             encryptor = Cipher.getInstance(CRYPTO);
@@ -57,7 +57,7 @@ public class ByteCrypto
         }
         catch(Exception ex)
         {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ex);
         }
     }
     
@@ -98,7 +98,7 @@ public class ByteCrypto
         }
         catch(Exception ex)
         {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ex);
         }
     }
     
@@ -116,7 +116,7 @@ public class ByteCrypto
         }
         catch(Exception ex)
         {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ex);
         }
     }
     

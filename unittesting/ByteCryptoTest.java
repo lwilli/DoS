@@ -1,6 +1,7 @@
 package unittesting;
 
-import saveload.ByteCrypto;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.Test;
 import saveload.ByteCrypto;
 import static org.junit.Assert.*;
@@ -11,6 +12,10 @@ import static org.junit.Assert.*;
  * @author Alec James
  */
 public class ByteCryptoTest {
+    
+    /** logger. */
+    private static final Logger log = 
+        Logger.getLogger(ByteCryptoTest.class.getName());
     
     @Test
     public void TestEncryptGeneral()
@@ -30,6 +35,7 @@ public class ByteCryptoTest {
         }
         catch(Exception ex)
         {
+            log.log(Level.SEVERE, "Failed test", ex);
             fail("Threw an exception - check crypto code");
         }
     }

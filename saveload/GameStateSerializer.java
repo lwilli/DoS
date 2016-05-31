@@ -1,10 +1,10 @@
 package saveload;
 
+import saveload.GameState;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 
 /**
  * GameStateSerializer handles serialization and deserialization of game state
@@ -33,7 +33,7 @@ public class GameStateSerializer
      * @return serialized game state
      * @throw IllegalArgumentException shouldn't
      */
-    public byte[] serialize() throws IllegalArgumentException
+    public byte[] serialize()
     {
         try
         {
@@ -44,7 +44,7 @@ public class GameStateSerializer
         }
         catch(Exception ex)
         {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ex);
         }
     }
     
@@ -54,7 +54,7 @@ public class GameStateSerializer
      * @param stateBytes the serialized game state
      * @throws IllegalArgumentException shouldn't
      */
-    public void deserialize(byte[] stateBytes) throws IllegalArgumentException
+    public void deserialize(byte[] stateBytes)
     {
         try
         {
@@ -64,7 +64,7 @@ public class GameStateSerializer
         }
         catch(Exception ex)
         {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ex);
         }
     }
     

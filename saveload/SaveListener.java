@@ -1,13 +1,16 @@
 package saveload;
 
+import saveload.GameState;
+import saveload.FileLoaderWindow;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * A listener for saving the game.
  * 
  * @author Alec James
  */
-public class SaveListener
+public class SaveListener implements ActionListener
 {
     /** the game state. */
     private GameState state;
