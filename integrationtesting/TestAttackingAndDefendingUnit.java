@@ -26,7 +26,7 @@ public class TestAttackingAndDefendingUnit {
 		unitList.add(defend1);
 		
 		boolean retVal = attack1.attackNearest(unitList);
-		assertEquals(false, retVal);
+		assertEquals(true, retVal);
 	}
 	
 	@Test
@@ -38,7 +38,7 @@ public class TestAttackingAndDefendingUnit {
 		unitList.add(attack1);
 		
 		boolean retVal = defend1.attackNearest(unitList);
-		assertEquals(false, retVal);
+		assertEquals(true, retVal);
 	}
 
 }
