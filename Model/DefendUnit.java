@@ -7,12 +7,12 @@ public class DefendUnit extends Unit {
    }
 
    /** Creates an DefendUnit with the given fields. */
-   public DefendUnit(int id, int posX, int posY, double maxHealth, 
-    double attackStrength, double defenseStrength, double attackSpeed, 
+   public DefendUnit(int id, int[] pos, double maxHealth, 
+    double attackStrength, double defenseStrength, 
     double attackRange) {
 
-      super(id, posX, posY, Unit.UnitType.Defend, maxHealth, attackStrength,
-       defenseStrength, attackSpeed, attackRange); 
+      super(id, new int[] {pos[0], pos[1]}, Unit.UnitType.DEFEND, maxHealth, attackStrength,
+       defenseStrength, attackRange); 
    }
    
 }

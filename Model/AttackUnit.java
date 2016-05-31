@@ -14,7 +14,7 @@ public class AttackUnit extends Unit {
     double attackStrength, double defenseStrength, 
     double attackRange, double moveSpeed) {
 
-      super(id, new int[] {pos[0], pos[1]}, Unit.UnitType.Attack, maxHealth, attackStrength,
+      super(id, new int[] {pos[0], pos[1]}, Unit.UnitType.ATTACK, maxHealth, attackStrength,
        defenseStrength, attackRange); 
       this.moveSpeed = moveSpeed;
    }

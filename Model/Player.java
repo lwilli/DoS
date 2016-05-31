@@ -8,12 +8,12 @@ public class Player extends Unit {
 
    /** Default constructor. */
    public Player() {
-      super(0, DEFAULT_PLAYER_POS[0], DEFAULT_PLAYER_POS[1], UnitType.Player, MAX_PLAYER_HP, 0, 1, 0, 0);
+      super(0, new int[] {DEFAULT_PLAYER_POS[0], DEFAULT_PLAYER_POS[1]}, UnitType.PLAYER, MAX_PLAYER_HP, 0, 1, 0);
    }
 
    /** Constructor with custom Player position. */
    public Player(int posX, int posY) {
-      super(0, posX, posY, UnitType.Player, MAX_PLAYER_HP, 0, 1, 0, 0);
+      super(0, new int[] {posX, posY}, UnitType.PLAYER, MAX_PLAYER_HP, 0, 1, 0);
    }
 
    @Override

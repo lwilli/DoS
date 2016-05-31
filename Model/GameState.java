@@ -56,7 +56,7 @@ public class GameState implements java.io.Serializable {
     * @return The list of active units.
     */
    public List<Unit> getActiveUnits(Unit.UnitType type) {
-      if (type == Unit.UnitType.Defend) {
+      if (type == Unit.UnitType.DEFEND) {
          return activeDefendUnits;
       }
       else {

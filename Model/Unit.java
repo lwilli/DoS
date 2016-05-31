@@ -4,8 +4,8 @@ import java.util.List;
 
 public abstract class Unit implements java.io.Serializable {
 
-   /** Enum to represent the two types of Units: Defend and Attack units. */
-   public enum UnitType {Defend, Attack, Player};
+   /** Enum to represent the two types of Units: DEFEND and ATTACK units. */
+   public enum UnitType {DEFEND, ATTACK, PLAYER};
 
    private final static int DEFAULT_ATTACK_RANGE = 1000;
    
@@ -64,7 +64,7 @@ public abstract class Unit implements java.io.Serializable {
 
    /**
     * Gets the Unit's type.
-    * @return The Unit's type (Attack or Defend).
+    * @return The Unit's type (ATTACK or DEFEND).
     */
    public UnitType getType() {
       return type;
@@ -179,7 +179,7 @@ public abstract class Unit implements java.io.Serializable {
 
       for (Unit unit : units) {
          double thisDist = distanceToUnit(unit);
-         if (unit.type == UnitType.Player && thisDist <= this.attackRange) {
+         if (unit.type == UnitType.PLAYER && thisDist <= this.attackRange) {
             return unit;
          }
          if (thisDist <= this.attackRange && thisDist < closestDist) {
@@ -234,19 +234,24 @@ public abstract class Unit implements java.io.Serializable {
 	  }
 	  
 	  Unit otherU = (Unit)other;
-	  if (otherU.id != this.id ||
-		  otherU.positionX != this.positionX ||
-          otherU.positionY != this.positionY ||
-	      otherU.type != this.type  ||
+	  boolean first = otherU.id != this.id ||
+			  otherU.positionX != this.positionX ||
+	          otherU.positionY != this.positionY;
+	  boolean second = otherU.type != this.type  ||
    		  otherU.unitMaxHealth != this.unitMaxHealth ||
-		  otherU.unitHealthLeft != this.unitHealthLeft || 
+		  otherU.unitHealthLeft != this.unitHealthLeft;
+	  boolean third = 	  
 		  otherU.attackStrength != this.attackStrength ||
 		  otherU.defenseStrength != this.defenseStrength ||
-		  otherU.attackRange != this.attackRange) {
-         return false;  
-	  }
+		  otherU.attackRange != this.attackRange;
 	  
-	  return true;
+	  return first || second || third;
+   }
+   
+   @Override
+   public int hashCode() {
+	return 0;
+	   
    }
    
    @Override
