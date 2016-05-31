@@ -238,11 +238,11 @@ public abstract class Unit implements java.io.Serializable {
 			  otherU.positionX == this.positionX &&
 	          otherU.positionY == this.positionY;
 	  boolean second = otherU.type == this.type  &&
-   		  otherU.unitMaxHealth == this.unitMaxHealth &&
-		  otherU.unitHealthLeft == this.unitHealthLeft;
-	  boolean third = otherU.attackStrength == this.attackStrength &&
-		  otherU.defenseStrength == this.defenseStrength &&
-		  otherU.attackRange == this.attackRange;
+   		  (Double.compare(otherU.unitMaxHealth, this.unitMaxHealth) == 0) &&
+		  (Double.compare(otherU.unitHealthLeft, this.unitHealthLeft) == 0);
+	  boolean third = (Double.compare(otherU.attackStrength, this.attackStrength) == 0) &&
+			  (Double.compare(otherU.defenseStrength, this.defenseStrength) == 0) &&
+			  (Double.compare(otherU.attackRange, this.attackRange) == 0);
 	  
 	  return first && second && third;
    }
