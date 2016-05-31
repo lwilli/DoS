@@ -58,11 +58,12 @@ public class TestIntegrationGameStateAndUnit {
 				   state.getActiveUnits(UnitType.Attack).toArray()));
 		
 		ArrayList<Unit> expectedDefenders = new ArrayList<Unit>();
-		DefendUnit expectedDUnit = new DefendUnit(2, 5, 9, 10.0, 2.0, 4.0, 1.0, 4.0);
+		DefendUnit expectedDUnit = new DefendUnit(2, 5, 8, 10.0, 2.0, 4.0, 1.0, 4.0);
 		expectedDUnit.setUnitHealth(9.25);
+		expectedDefenders.add(new Player());
 		expectedDefenders.add(expectedDUnit);
-		//assertEquals(expectedDefenders, state.getActiveUnits(UnitType.Defend));
-	
+			assertTrue(Arrays.deepEquals(expectedDefenders.toArray(), 
+				   state.getActiveUnits(UnitType.Defend).toArray()));	
 	}
 
 }
