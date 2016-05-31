@@ -1,4 +1,4 @@
-package logic;
+package Model;
 
 import java.util.List;
 
