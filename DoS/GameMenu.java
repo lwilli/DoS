@@ -132,7 +132,7 @@ public class GameMenu extends BasicGameState  {
 		}
 		
 		/* Load Game*/ 
-		if((xpos  > 566 && xpos < 713) && (ypos < 415 && ypos > 370) && input.isMouseButtonDown(0) {
+		if((xpos  > 566 && xpos < 713) && (ypos < 415 && ypos > 370) && input.isMouseButtonDown(0)) {
 				System.out.println("Load Game");
 		}
 		
