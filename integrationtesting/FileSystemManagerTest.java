@@ -6,10 +6,6 @@
 package integrationtesting;
 
 import java.io.File;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import saveload.FileSystemManager;
 import saveload.GameState;
@@ -32,7 +28,7 @@ public class FileSystemManagerTest {
     }
     
     @Test
-    public void TestLoadFileGeneral()
+    public void TestLoadFileGeneral() throws Exception
     {
         try
         {
