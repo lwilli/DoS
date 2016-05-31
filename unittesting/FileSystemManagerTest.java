@@ -6,6 +6,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import saveload.GameState;
 
 /**
  * FileSystemManager unit Test.
@@ -39,7 +40,9 @@ public class FileSystemManagerTest {
     {
         try
         {
-            new FileSystemManager("", "best password ever");
+            FileSystemManager m = new FileSystemManager("", "best password ever");
+            //and now, to avoid sonarqube's complaints
+            m.saveToFile("MySave", new GameState());
             fail();
         }
         catch(Exception ex)

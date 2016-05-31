@@ -9,14 +9,11 @@ public class GameState implements java.io.Serializable {
    private static final int MAX_WAVE_NUM = 10;
 
    private int waveNum;
-   private int difficulty;
    private boolean active;
 
    /** Default constructor. */
    public GameState() {
       waveNum = 1;
-      roundTimeLeft = 0;
-      difficulty = 0;
       active = false;
    }
 
