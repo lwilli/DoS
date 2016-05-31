@@ -6,7 +6,11 @@ import logic.Unit.UnitType;
 
 import org.junit.Test;
 
-/* Tests by Logan Williams */
+/**
+ * Tests for basic use of the Unit class. 
+ *
+ * @author Logan Williams 
+ */
 public class TestUnit {
 
 	public class ImplementedUnit extends Unit{
