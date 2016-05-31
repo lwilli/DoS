@@ -1,4 +1,4 @@
-package DoS;
+package dos;
 
 
 import org.lwjgl.input.Mouse;
@@ -15,7 +15,6 @@ import de.lessvoid.nifty.controls.button.builder.ButtonBuilder;
 import de.lessvoid.nifty.controls.label.builder.LabelBuilder;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.nulldevice.NullSoundDevice;
-import de.lessvoid.nifty.renderer.lwjgl.input.LwjglInputSystem;
 import de.lessvoid.nifty.slick2d.input.PlainSlickInputSystem;
 import de.lessvoid.nifty.slick2d.input.SlickInputSystem;
 import de.lessvoid.nifty.slick2d.render.SlickRenderDevice;
@@ -28,15 +27,14 @@ import org.newdawn.slick.opengl.SlickCallable;
 import java.awt.Font;
 
 public class GameMenu extends BasicGameState  {
-	public String mouse ="No input yet";
+	public static final String MOUSE ="No input yet";
 
 	public Image staley;
 	private Nifty nifty;
-	public static final int staleyX = 200;
-	public static final int staleyY = 150;
-   public static final String labelWidth = "100px";
-   public static final String labelHeight = "25px";
-	public UnicodeFont font;
+	public static final int STALEYX = 200;
+	public static final int STALEYY = 150;
+   public static final String LABELWIDTH = "100px";
+   public static final String LABELHEIGHT = "25px";
 	private boolean quitGame = false;
 	private Rectangle playButton = new Rectangle(275, 350, 100 ,50);
 	private Element exit;
@@ -75,8 +73,8 @@ public class GameMenu extends BasicGameState  {
 	             style("nifty-panel-bright");
 	             childLayoutVertical(); 
 	             control(new LabelBuilder() {{
-	            	 width(labelWidth);                        
-		             height(labelHeight);
+	            	 width(LABELWIDTH);                        
+		             height(LABELHEIGHT);
 		             label("Are you sure?");
 		             color("#B0171F");
 	             }});
@@ -84,14 +82,14 @@ public class GameMenu extends BasicGameState  {
 		                childLayoutHorizontal();                                                       
 		                control(new ButtonBuilder("yes_quit", "YES") {{
 		                	childLayoutCenter();
-		                	width(labelWidth);                        
-			                height(labelHeight);
+		                	width(LABELWIDTH);                        
+			                height(LABELHEIGHT);
 		                }});
 		                panel(new PanelBuilder() {{ width("10px"); }});
 		                control(new ButtonBuilder("no_quit", "NO") {{
 		                	childLayoutCenter();
-		                	width(labelHeight);                        
-			                height(labelHeight);
+		                	width(LABELHEIGHT);                        
+			                height(LABELHEIGHT);
 		                }});
 		            }});
 	         }});
@@ -114,7 +112,7 @@ public class GameMenu extends BasicGameState  {
         SlickCallable.leaveSafeBlock();
        
 		/*For reference only just checks mouse position */
-		gr.drawString(mouse, 50, 50);
+		gr.drawString(MOUSE, 50, 50);
 		
 	}
 	
@@ -127,34 +125,20 @@ public class GameMenu extends BasicGameState  {
 		int xpos = Mouse.getX();
 		int ypos = Mouse.getY();
 		healthFill.setStartColor(Color.red);
-		
-		mouse = "Mouse position x: " + xpos + " y : " + ypos;
       
 		/* Play Game */
-		if((xpos  > 566 && xpos < 715) && (ypos < 475 && ypos > 425)) {
-			
-			if (input.isMouseButtonDown(0)) {
-				
+		if((xpos  > 566 && xpos < 715) && (ypos < 475 && ypos > 425) && input.isMouseButtonDown(0) {	
 				sbg.enterState(1);
-				
-			}
-				
 		}
 		
 		/* Load Game*/ 
-		if((xpos  > 566 && xpos < 713) && (ypos < 415 && ypos > 370)) {
-			
-			if (input.isMouseButtonDown(0)) {
+		if((xpos  > 566 && xpos < 713) && (ypos < 415 && ypos > 370) && input.isMouseButtonDown(0) {
 				System.out.println("Load Game");
-			}		
 		}
 		
 		/* Show Tutorial */
-		if((xpos  > 566 && xpos < 713) && (ypos < 360 && ypos > 315)) {
-			
-			if (input.isMouseButtonDown(0)) {
+		if((xpos  > 566 && xpos < 713) && (ypos < 360 && ypos > 315) && input.isMouseButtonDown(0)) {
 				System.out.println("Tutorial Game");
-			}		
 		}
 
 		
@@ -188,7 +172,7 @@ public class GameMenu extends BasicGameState  {
 	
     public UnicodeFont getNewFont(String fontName , int fontSize)
     {
-        font = new UnicodeFont(new Font(fontName , Font.PLAIN , fontSize));
+        UnicodeFont font = new UnicodeFont(new Font(fontName , Font.PLAIN , fontSize));
         font.addGlyphs("@");
         return font;
     }
