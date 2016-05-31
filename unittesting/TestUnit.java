@@ -34,7 +34,7 @@ public class TestUnit {
 	
 	@Test
 	public void TestTakeDamagePositive() {
-		Unit u1 = new ImplementedUnit(1, 10, 32, UnitType.Attack, 50, 3, 12, 1.0, 100);
+		Unit u1 = new ImplementedUnit(1, new int[] {10, 32}, UnitType.Attack, 50, 3, 12, 100);
 		double newHealth = u1.takeDamage(10);
 		
 		assertEquals(40, newHealth, 0);
@@ -42,7 +42,7 @@ public class TestUnit {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void TestTakeDamageNegative() {
-		Unit u1 = new ImplementedUnit(1, 10, 32, UnitType.Defend, 100, 3, 12, 1.0, 50);
+		Unit u1 = new ImplementedUnit(1,new int[] {10, 32}, UnitType.Defend, 100, 3, 12, 50);
 		u1.takeDamage(-10);
 		
 		fail("No Exception Throwns");
@@ -50,7 +50,7 @@ public class TestUnit {
 	
 	@Test
 	public void TestTakeDamagePastZero() {
-		Unit u1 = new ImplementedUnit(1, 10, 32, UnitType.Defend, 100, 3, 12, 1.0, 50);
+		Unit u1 = new ImplementedUnit(1, new int[] {10, 32}, UnitType.Defend, 100, 3, 12, 50);
 		double newHealth = u1.takeDamage(101);
 		
 		assertEquals(0, newHealth, 0);
@@ -58,8 +58,8 @@ public class TestUnit {
 	
 	@Test
 	public void TestDealDamageGeneral() {
-		Unit defender = new ImplementedUnit(1, 10, 32, UnitType.Defend, 100, 3, 12, 1.0, 50);
-		Unit attacker = new ImplementedUnit(1, 10, 32, UnitType.Attack, 100, 27, 5, 1.0, 50);
+		Unit defender = new ImplementedUnit(1, new int[] {10, 32}, UnitType.Defend, 100.0, 3.0, 12.0, 50);
+		Unit attacker = new ImplementedUnit(1, new int[] {10, 32}, UnitType.Attack, 100.0, 27.0, 5.0, 50);
 		attacker.dealDamage(defender);
 		
 		assertEquals(97.75, defender.getUnitHealthLeft(), 0.001);
