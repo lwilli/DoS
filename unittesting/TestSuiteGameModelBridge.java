@@ -9,6 +9,6 @@ import org.junit.runners.Suite.SuiteClasses;
  * @author Bill Mak 
  */
 @RunWith(Suite.class)
-@SuiteClasses({ GameModelBridgeTests.class })
+@SuiteClasses({ TestGameModelBridge.class })
 public class TestSuiteGameModelBridge {
 }
