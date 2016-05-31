@@ -25,7 +25,7 @@ public class TestLoopGameState {
 	/**
 	 * Tests for just the default Player defender.
 	 */
-	public void TestRunAllAttacksOneLoop() {
+	public void testRunAllAttacksOneLoop() {
 		GameState state = new GameState();
 		
 		state.runAllAttacks();
@@ -37,7 +37,7 @@ public class TestLoopGameState {
 	/** 
 	 * Tests for one attacker and one defender (default Player).
 	 */
-	public void TestRunAllAttacksTwoLoops() {
+	public void testRunAllAttacksTwoLoops() {
 		GameState state = new GameState();
 		AttackUnit attacker = new AttackUnit(1, new int[] {5, 5}, 10.0, 3.0, 1.0, 1.0);
 		if (state.addActiveUnit(attacker) != true) {
@@ -56,7 +56,7 @@ public class TestLoopGameState {
 	/**
 	 * Tests for multiple attackers and multiple defenders.
 	 */
-	public void TestRunAllAttacksSevenLoops() {
+	public void testRunAllAttacksSevenLoops() {
 		GameState state = new GameState();
 		AttackUnit attacker1 = new AttackUnit(1, new int[] {25, 45}, 10.0, 3.0, 1.0, 0.1);
 		AttackUnit attacker2 = new AttackUnit(2, new int[] {51, 55}, 10.0, 3.0, 1.0, 0.1);
