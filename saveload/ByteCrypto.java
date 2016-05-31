@@ -1,14 +1,11 @@
 package saveload;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.PBEParameterSpec;
-import javax.crypto.spec.SecretKeySpec;
 
 /**
  * ByteCrypto encrypts byte arrays.
@@ -18,7 +15,7 @@ import javax.crypto.spec.SecretKeySpec;
 public class ByteCrypto
 {
     /** Encryption standard used. */
-    private final static String CRYPTO = "PBEwithMD5AndDES";
+    private static final String CRYPTO = "PBEwithMD5AndDES";
     
     /** Encryption Cipher. */
     private Cipher encryptor;
@@ -27,7 +24,7 @@ public class ByteCrypto
     private Cipher decryptor;
     
     /** Salt. */
-    private final static byte[] salt = { (byte)0xDE, (byte)0xAD, (byte)0xBE, 
+    private static final byte[] salt = { (byte)0xDE, (byte)0xAD, (byte)0xBE, 
         (byte)0xEF, (byte)0x23, (byte)0x19, (byte)0x67, (byte)0x54 };
     
     /** number of iterations. */
@@ -37,9 +34,8 @@ public class ByteCrypto
      * Constructor. Generates a key based on the user's password.
      * 
      * @param pass the user's password
-     * @throws IllegalArgumentException shouldn't
      */
-    public ByteCrypto(String pass) throws IllegalArgumentException
+    public ByteCrypto(String pass)
     {
         try
         {
@@ -94,7 +90,7 @@ public class ByteCrypto
      * @return the byte array encrypted
      * @throws IllegalArgumentException shouldn't
      */
-    public String encrypt(byte[] toEncrypt) throws IllegalArgumentException
+    public String encrypt(byte[] toEncrypt)
     {
         try
         {
@@ -111,9 +107,8 @@ public class ByteCrypto
      * 
      * @param toDecrypt the string to decrypt (a byte array string)
      * @return decrypted byte array
-     * @throws IllegalArgumentException shouldn't
      */
-    public byte[] decrypt(String toDecrypt) throws IllegalArgumentException
+    public byte[] decrypt(String toDecrypt)
     {
         try
         {

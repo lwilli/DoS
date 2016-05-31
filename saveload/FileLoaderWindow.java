@@ -1,6 +1,8 @@
 package saveload;
 
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -16,6 +18,10 @@ public class FileLoaderWindow
 {
     /** File System Manager. */
     private FileSystemManager fileSys;
+    
+    /** Error logger. */
+    private static final Logger log = 
+        Logger.getLogger(FileLoaderWindow.class.getName());
     
     /**
      * Provides the username and password to the internal FileSystemManager.
@@ -47,7 +53,7 @@ public class FileLoaderWindow
             String saveName = "";
             
             //get the save file name
-            while(saveName.equals(""))
+            while("".equals(saveName))
             {
                 saveName = JOptionPane.showInputDialog(msgFrame,
                     "Enter the name for this save: ",
@@ -78,6 +84,7 @@ public class FileLoaderWindow
         //on a caught exception, display an error
         catch(Exception ex)
         {
+            log.log(Level.SEVERE, "Crypto error!");
             JOptionPane.showMessageDialog(msgFrame,
                 "Error: cannot save file",
                 "Error",
@@ -124,7 +131,7 @@ public class FileLoaderWindow
         }
         catch(Exception ex)
         {
-            ex.printStackTrace();
+            log.log(Level.SEVERE, "Crypto Error!");
             JFrame frame = new JFrame();
             JOptionPane.showMessageDialog(frame,
                 "Error: cannot load file",

@@ -20,7 +20,7 @@ public class FileSystemManager
     private String saveFileDir;
     
     /** Extension for save files. */
-    private final static String EXT = ".save";
+    private static final String EXT = ".save";
     
     /**
      * Makes a new file system manager. The username makes a part of the
@@ -33,7 +33,7 @@ public class FileSystemManager
     public FileSystemManager(String user, String pass)
     {
         //don't allow empty Strings
-        if(user.equals("") || pass.equals(""))
+        if("".equals(user) || "".equals(pass))
         {
             throw new IllegalArgumentException();
         }
@@ -43,7 +43,14 @@ public class FileSystemManager
                 + user + "/";
         
         //set up crypto
-        crypto = new ByteCrypto(pass);
+        try
+        {
+            crypto = new ByteCrypto(pass);
+        }
+        catch(Exception ex)
+        {
+            //dammit.
+        }
         
         //create save file directories
         new File(saveFileDir).mkdirs();
@@ -59,7 +66,6 @@ public class FileSystemManager
      * @throws IllegalArgumentException shouldn't
      */
     public boolean saveToFile(String saveFileName, GameState state)
-        throws IllegalArgumentException
     {
         boolean overwritten = false;
         
@@ -89,7 +95,7 @@ public class FileSystemManager
         }
         catch(Exception ex)
         {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ex);
         }
         
         return overwritten;
@@ -117,6 +123,8 @@ public class FileSystemManager
             encSavedData += in.next() + " ";
         }
         
+        in.close();
+        
         encSavedData = encSavedData.trim();
         
         //decrypt it
@@ -135,16 +143,5 @@ public class FileSystemManager
     public String getSaveFileDir()
     {
         return saveFileDir;
-    }
-    
-    public static void main(String[] args) throws Exception
-    {
-        GameState g = new GameState();
-        g.setPlayerHealth(56);
-        
-        FileSystemManager fsm = new FileSystemManager("AlecJ", "MyPassword");
-        fsm.saveToFile("test", g);
-        GameState g2 = fsm.loadFile("test");
-        System.out.println(g2.getPlayerHealth());
     }
 }
