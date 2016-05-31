@@ -18,7 +18,6 @@ public abstract class Unit implements java.io.Serializable {
    private double attackStrength;
    private double defenseStrength;
    private double attackRange;
-   private double attackSpeed;   
    
    /** Default Unit constructor (probably shouldn't use). */
    public Unit() {
@@ -30,23 +29,20 @@ public abstract class Unit implements java.io.Serializable {
       unitHealthLeft = unitMaxHealth;
       attackStrength = 1.0;
       defenseStrength = 1.0;
-      attackSpeed = 1;
       attackRange = DEFAULT_ATTACK_RANGE;
    }
 
    /** Creates a Unit with the given fields. */
-   public Unit(int id, int posX, int posY, UnitType type, double maxHealth, 
-    double attackStrength, double defenseStrength, double attackSpeed, 
-    double attackRange) {
+   public Unit(int id, int[] pos, UnitType type, double maxHealth, 
+    double attackStrength, double defenseStrength, double attackRange) {
       this.id = id;
-      this.positionX = posX;
-      this.positionY = posY;
+      this.positionX = pos[0];
+      this.positionY = pos[1];
       this.type = type;
       this.unitMaxHealth = maxHealth;
       this.unitHealthLeft = this.unitMaxHealth;
       this.attackStrength = attackStrength;
       this.defenseStrength = defenseStrength;
-      this.attackSpeed = attackSpeed;
       this.attackRange = attackRange;
    }
    
@@ -63,8 +59,7 @@ public abstract class Unit implements java.io.Serializable {
     * @return Two-element array containing the x and y positions, respectively.
     */
    public int[] getPosition() {
-      int pos[] = {positionX, positionY};
-      return pos;
+      return new int[] {positionX, positionY};
    }
 
    /**
@@ -123,14 +118,6 @@ public abstract class Unit implements java.io.Serializable {
    }
 
    /**
-    * Gets the Unit's attack speed.
-    * @return The Unit's attack speed.
-    */
-   public double getAttackSpeed() {
-      return attackSpeed;
-   }
-   
-   /**
     * Deals damage to the Unit's health.
     * @param damage The amount by which to reduce the Unit's health.
     * @return The Unit's new health amount (also can be seen with a 
@@ -170,8 +157,8 @@ public abstract class Unit implements java.io.Serializable {
     * @return The distance to the unit as a double.
     */
    private double distanceToUnit(Unit unit) {
-      int pos[] = unit.getPosition();
-      return Math.sqrt(Math.pow(this.positionX - pos[0], 2) + 
+      int[] pos = unit.getPosition();
+      return Math.sqrt(Math.pow((double)this.positionX - pos[0], 2) + 
        (Math.pow(this.positionY - pos[1], 2)));
    }
 
@@ -255,8 +242,7 @@ public abstract class Unit implements java.io.Serializable {
 		  otherU.unitHealthLeft != this.unitHealthLeft || 
 		  otherU.attackStrength != this.attackStrength ||
 		  otherU.defenseStrength != this.defenseStrength ||
-		  otherU.attackRange != this.attackRange ||
-		  otherU.attackSpeed != this.attackSpeed) {
+		  otherU.attackRange != this.attackRange) {
          return false;  
 	  }
 	  
@@ -268,7 +254,7 @@ public abstract class Unit implements java.io.Serializable {
 	   return "id: " + this.id + ", position: [" + this.positionX + "," + this.positionY +
 			   "], type: " + this.type + ", maxHealth: " + this.unitMaxHealth + ", healthLeft: " + 
 			   this.unitHealthLeft + ", attackStrength: " + this.attackStrength + ", defenseStrength: " +
-			   this.defenseStrength + ", attackRange: " + this.attackRange + ", attackSpeed: " + this.attackSpeed;
+			   this.defenseStrength + ", attackRange: " + this.attackRange;
    }
    
 }

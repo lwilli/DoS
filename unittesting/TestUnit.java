@@ -1,8 +1,8 @@
 package unittesting;
 
 import static org.junit.Assert.*;
-import logic.Unit;
-import logic.Unit.UnitType;
+import Model.Unit;
+import Model.Unit.UnitType;
 
 import org.junit.Test;
 
@@ -13,18 +13,18 @@ import org.junit.Test;
  */
 public class TestUnit {
 
-	public class ImplementedUnit extends Unit{
+	public class ImplementedUnit extends Model.Unit{
 		private static final long serialVersionUID = 1L;
 
-		public ImplementedUnit(int id, int posX, int posY, UnitType type, int maxHealth, 
-			    int attackStrength, int defenseStrength, double attackSpeed, int range) {
-			super(id, posX, posY, type, maxHealth, attackStrength, defenseStrength, attackSpeed, range);
+		public ImplementedUnit(int id, int[] pos, UnitType type, double maxHealth, 
+			    double attackStrength, double defenseStrength, double range) {
+			super(id, new int[] {pos[0], pos[1]}, type, maxHealth, attackStrength, defenseStrength, range);
 		}
 	}
 	
 	@Test
 	public void TestGetPositionGeneral() {
-		Unit u1 = new ImplementedUnit(1, 10, 32, UnitType.Attack, 100, 1, 1, 1.0, 50);
+		Unit u1 = new ImplementedUnit(1, new int[] {10, 32}, UnitType.Attack, 100.0, 1.0, 1.0, 50.0);
 		int pos[] = u1.getPosition();
 		int expected[] = {10, 32};
 		
