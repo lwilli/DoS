@@ -18,6 +18,7 @@ import DoS.HealthView;
 import DoS.PlayGame;
 import de.lessvoid.nifty.slick2d.NiftyStateBasedGame;
 
+/*Test by Juan Carlos Ferrel */
 public class TestIntegrationHealthViewandGame {
 	public static int x;
 	public static  int y;
@@ -90,7 +91,7 @@ public class TestIntegrationHealthViewandGame {
 	                	
 	                	if (x >= 750) {
 	                		health.decreaseHealth();
-	                		assertEquals(health.getGrade(), "C");
+	                		assertEquals(health.getGrade(), "B");
 	                		container.exit();
 	                		
 	                	}
@@ -109,5 +110,5 @@ public class TestIntegrationHealthViewandGame {
 	            System.out.println("Error");
 	        }
 	}
-	
+
 }
