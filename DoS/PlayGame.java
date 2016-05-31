@@ -185,6 +185,7 @@ public class PlayGame extends BasicGameState{
 				gameStart = true;
 			
 			} catch (InterruptedException e) {
+				Logger.getLogger(PlayGame.class.getName()).log(Level.SEVERE, "Game fail to initialize");
 				throw new SlickException("Game failed to start");
 			}
 		}
