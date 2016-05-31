@@ -5,7 +5,7 @@ import Model.HealthView;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-public class HelathViewTest {
+public class TestHealthView {
 
 	
 

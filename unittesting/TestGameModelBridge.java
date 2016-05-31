@@ -14,7 +14,7 @@ import dos.GameModelBridge;
  * @author Bill Mak
  *
  */
-public class GameModelBridgeTests {
+public class TestGameModelBridge {
 
    @Test
    public void addWaveUnitsTest() {

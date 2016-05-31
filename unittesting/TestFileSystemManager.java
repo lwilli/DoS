@@ -13,11 +13,11 @@ import saveload.GameState;
  * 
  * @author Alec James
  */
-public class FileSystemManagerTest {
+public class TestFileSystemManager {
     
     /** Logger. */
     private static final Logger log = 
-        Logger.getLogger(FileSystemManagerTest.class.getName());
+        Logger.getLogger(TestFileSystemManager.class.getName());
     
     @Test
     public void TestGetSaveFileDirHasUsername()

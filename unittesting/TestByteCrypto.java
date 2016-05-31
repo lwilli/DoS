@@ -11,11 +11,11 @@ import static org.junit.Assert.*;
  * 
  * @author Alec James
  */
-public class ByteCryptoTest {
+public class TestByteCrypto {
     
     /** logger. */
     private static final Logger log = 
-        Logger.getLogger(ByteCryptoTest.class.getName());
+        Logger.getLogger(TestByteCrypto.class.getName());
     
     @Test
     public void TestEncryptGeneral()

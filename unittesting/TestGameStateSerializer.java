@@ -13,11 +13,11 @@ import static org.junit.Assert.*;
  * 
  * @author Alec James
  */
-public class GameStateSerializerTest 
+public class TestGameStateSerializer
 {
     /** logger. */
     private Logger log = 
-        Logger.getLogger(GameStateSerializerTest.class.getName());
+        Logger.getLogger(TestGameStateSerializer.class.getName());
     
     private static class TestGS extends GameState
     {
