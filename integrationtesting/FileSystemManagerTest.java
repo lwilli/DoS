@@ -28,7 +28,7 @@ public class FileSystemManagerTest {
     }
     
     @Test
-    public void TestLoadFileGeneral() throws Exception
+    public void TestLoadFileGeneral()
     {
         try
         {
