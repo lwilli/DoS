@@ -127,7 +127,7 @@ public class GameMenu extends BasicGameState  {
 		healthFill.setStartColor(Color.red);
       
 		/* Play Game */
-		if((xpos  > 566 && xpos < 715) && (ypos < 475 && ypos > 425) && input.isMouseButtonDown(0) {	
+		if((xpos  > 566 && xpos < 715) && (ypos < 475 && ypos > 425) && input.isMouseButtonDown(0)) {	
 				sbg.enterState(1);
 		}
 		
