@@ -1,4 +1,4 @@
-package tests;
+package looptesting;
 
 import static org.junit.Assert.*;
 
