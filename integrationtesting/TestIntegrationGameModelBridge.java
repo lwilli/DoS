@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import DoS.GameModelBridge;
+import dos.GameModelBridge;
 import Model.AttackUnit;
 import Model.Unit;
 
@@ -27,7 +27,7 @@ public class TestIntegrationGameModelBridge {
       List<Unit> attackUnits = new ArrayList<Unit>();
       
       for (int ndx = 0; ndx < 10; ndx++) {
-         attackUnits.add(new AttackUnit(0, 0, 300, 50.0, 1, 1, 1, 1, 1));
+         attackUnits.add(new AttackUnit(0, new int[] {0, 300}, 50.0, 1, 1, 1));
       }
       
       for (int ndx = 0; ndx < 10; ndx++) {

@@ -9,13 +9,13 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
-import DoS.HealthView;
+import Model.HealthView;
 
 /*Test by Juan Carlos Ferrel */
 public class TestIntegrationHealthViewandGame {
-	public static final int x;
-	public static final int y;
-	public static final int count;
+	public static int x = 0;
+	public static int y = 0;
+	public static int count = 0;
 	
 	@Test 
 	public void testGameOver() {

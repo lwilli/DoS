@@ -1,10 +1,10 @@
-package unittests;
+package unittesting;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import DoS.GameModelBridge;
+import dos.GameModelBridge;
 
 /**
  * Tests GameModelBridge so and that the

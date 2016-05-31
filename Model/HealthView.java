@@ -1,4 +1,5 @@
-package DoS;
+package Model;
+
 /*Just use a customize Label to set up the health system*/
 public class HealthView {
 	public enum Grade {

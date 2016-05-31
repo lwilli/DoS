@@ -1,7 +1,7 @@
-package DoSTest;
+package unittesting;
 
 /*Test by Juan Carlos Ferrel */
-import DoS.HealthView;
+import Model.HealthView;
 import static org.junit.Assert.*;
 import org.junit.Test;
 

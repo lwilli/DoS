@@ -159,7 +159,7 @@ public abstract class Unit implements java.io.Serializable {
    private double distanceToUnit(Unit unit) {
       int[] pos = unit.getPosition();
       return Math.sqrt(Math.pow((double)this.positionX - pos[0], 2) + 
-       (Math.pow(this.positionY - pos[1], 2)));
+       (Math.pow((double)this.positionY - pos[1], 2)));
    }
 
 

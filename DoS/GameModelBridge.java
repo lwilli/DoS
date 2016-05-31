@@ -26,7 +26,7 @@ public class GameModelBridge {
 	   Set<Unit> deadUnits = new HashSet<Unit>();
 	   int state = 0;
 		gs.runAllAttacks();
-		List<Unit> atkUnits = gs.getActiveUnits(Unit.UnitType.Attack);
+		List<Unit> atkUnits = gs.getActiveUnits(Unit.UnitType.ATTACK);
 		for (Unit atk: atkUnits) {
 			if (atk.getUnitHealthLeft() <= 0) {
 			   deadUnits.add(atk);
@@ -53,7 +53,7 @@ public class GameModelBridge {
 	 */
 	public void addWaveUnits(int numUnits) {
 		for (int ndx = 0; ndx < numUnits; ndx++) {
-			Unit newAttacker = new AttackUnit(atkCount, 0, 300, 50.0, 1, 1, 1, 1, 1);
+			Unit newAttacker = new AttackUnit(atkCount, new int[] {0, 300}, 50.0, 1, 1, 1);
 			gs.addActiveUnit(newAttacker);
 		}
 	}
@@ -65,7 +65,7 @@ public class GameModelBridge {
 	 * @param yPos - should be mouse at Y
 	 */
 	public void addDefenderUnit(int xPos, int yPos) {
-		Unit newDefender = new DefendUnit(defCount, xPos, yPos, 100, 1, 1, 1, 50);
+		Unit newDefender = new DefendUnit(defCount, new int[] {xPos, yPos}, 100, 1, 1, 50);
 		defCount++;
 		gs.addActiveUnit(newDefender);
 	}
@@ -76,7 +76,7 @@ public class GameModelBridge {
 	 * @return List of Active Defenders
 	 */
 	public List<Unit> returnDefenders() {
-	   return gs.getActiveUnits(Unit.UnitType.Defend);
+	   return gs.getActiveUnits(Unit.UnitType.DEFEND);
 	}
 	
 	/**
@@ -85,7 +85,7 @@ public class GameModelBridge {
 	 * @return List of Active Attackers
 	 */
 	public List<Unit> returnAttackers() {
-      return gs.getActiveUnits(Unit.UnitType.Attack);
+      return gs.getActiveUnits(Unit.UnitType.ATTACK);
    }
 	
 }
