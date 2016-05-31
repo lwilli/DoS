@@ -1,4 +1,4 @@
-package DoSTest;
+package integrationtesting;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
@@ -7,22 +7,15 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.BasicGameState;
-import org.newdawn.slick.state.StateBasedGame;
-
 import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
-
 import DoS.HealthView;
-import DoS.PlayGame;
-import de.lessvoid.nifty.slick2d.NiftyStateBasedGame;
 
 /*Test by Juan Carlos Ferrel */
 public class TestIntegrationHealthViewandGame {
-	public static int x;
-	public static  int y;
-	public static int count;
+	public static final int x;
+	public static final int y;
+	public static final int count;
 	
 	@Test 
 	public void testGameOver() {
