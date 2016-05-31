@@ -10,5 +10,5 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ TestHealthView.class })
-  public class TestSuiteUnit {
+  public class TestSuiteHealthView {
   }
