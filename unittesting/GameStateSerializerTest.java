@@ -1,6 +1,7 @@
 
 package unittesting;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import saveload.GameStateSerializer;
 import saveload.GameState;
@@ -37,6 +38,7 @@ public class GameStateSerializerTest
         }
         catch(Exception ex)
         {
+            log.log(Level.SEVERE, "serialization exception!", ex);
             fail("Serialization/Deserialization threw an exception.");
         }
         

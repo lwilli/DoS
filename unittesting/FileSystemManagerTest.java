@@ -39,7 +39,7 @@ public class FileSystemManagerTest {
     {
         try
         {
-            FileSystemManager m = new FileSystemManager("", "best password ever");
+            new FileSystemManager("", "best password ever");
             fail();
         }
         catch(Exception ex)
