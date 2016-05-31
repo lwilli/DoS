@@ -80,6 +80,8 @@ public class TestLoopGameState {
 		expectedAttackers.add(attacker1);
 		expectedAttackers.add(attacker2);
 		expectedAttackers.add(attacker3);
+		System.out.println("attackers: " + expectedAttackers);
+		System.out.println("results:   " + state.getActiveUnits(UnitType.ATTACK));
 		assertTrue(Arrays.deepEquals(expectedAttackers.toArray(), 
 				   state.getActiveUnits(UnitType.ATTACK).toArray()));
 		

@@ -1,4 +1,4 @@
-package tests;
+package integrationtesting;
 
 import static org.junit.Assert.*;
 
@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.junit.Test;
-import logic.GameState;
-import logic.AttackUnit;
-import logic.DefendUnit;
-import logic.Unit.UnitType;
-import logic.Unit;
-import logic.Player;
+import Model.GameState;
+import Model.AttackUnit;
+import Model.DefendUnit;
+import Model.Unit.UnitType;
+import Model.Unit;
+import Model.Player;
 
 /** 
  * Integration tests for GameState and Unit.

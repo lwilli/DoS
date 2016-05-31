@@ -234,18 +234,17 @@ public abstract class Unit implements java.io.Serializable {
 	  }
 	  
 	  Unit otherU = (Unit)other;
-	  boolean first = otherU.id != this.id ||
-			  otherU.positionX != this.positionX ||
-	          otherU.positionY != this.positionY;
-	  boolean second = otherU.type != this.type  ||
-   		  otherU.unitMaxHealth != this.unitMaxHealth ||
-		  otherU.unitHealthLeft != this.unitHealthLeft;
-	  boolean third = 	  
-		  otherU.attackStrength != this.attackStrength ||
-		  otherU.defenseStrength != this.defenseStrength ||
-		  otherU.attackRange != this.attackRange;
+	  boolean first = otherU.id == this.id &&
+			  otherU.positionX == this.positionX &&
+	          otherU.positionY == this.positionY;
+	  boolean second = otherU.type == this.type  &&
+   		  otherU.unitMaxHealth == this.unitMaxHealth &&
+		  otherU.unitHealthLeft == this.unitHealthLeft;
+	  boolean third = otherU.attackStrength == this.attackStrength &&
+		  otherU.defenseStrength == this.defenseStrength &&
+		  otherU.attackRange == this.attackRange;
 	  
-	  return first || second || third;
+	  return first && second && third;
    }
    
    @Override
