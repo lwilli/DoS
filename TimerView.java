@@ -1,12 +1,10 @@
-import oracle.jrockit.jfr.JFR;
+package DoS;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JFrame;
 import javax.swing.Timer;
-
 import javax.swing.JLabel;
-import javax.swing.GroupLayout;
+
 
 /*
 To start TimerView include a JLabel in the parameters
@@ -34,9 +32,22 @@ public class TimerView {
     /*
     set up the timer Object to 3000 seconds
      */
+    
+    public int getStartTime() {
+    	return this.startTime;
+    }
+    public void setStartTime(int start) {
+    	this.startTime = start;
+    }
+    
+    public int getEndTime() {
+    	return this.endTime;
+    }
+    public void setEndTime(int end) {
+    	this.endTime = end;
+    }
     public void startTimer() {
         this.timer = new Timer(1000, new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
                 startTime += 1;
                 int rem = startTime % 60;
@@ -49,7 +60,6 @@ public class TimerView {
         });
 
         timer.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
 
                 if (startTime == 299) {
