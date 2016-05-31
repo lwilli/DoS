@@ -47,7 +47,7 @@ public class FileSystemManagerTest {
         }
         catch(Exception ex)
         {
-            log.log(Level.SEVERE, "Test failure");
+            log.log(Level.SEVERE, "Test failure", ex);
             fail();
         }
     }

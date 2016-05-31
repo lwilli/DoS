@@ -1,6 +1,7 @@
 
 package unittesting;
 
+import java.util.logging.Logger;
 import saveload.GameStateSerializer;
 import saveload.GameState;
 import org.junit.Test;
@@ -13,10 +14,13 @@ import static org.junit.Assert.*;
  */
 public class GameStateSerializerTest 
 {
+    /** logger. */
+    private Logger log = 
+        Logger.getLogger(GameStateSerializerTest.class.getName());
     
     private static class TestGS extends GameState
     {
-        public String str = "Hello";
+        public final String str = "Hello";
     }
     
     @Test
