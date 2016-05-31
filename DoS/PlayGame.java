@@ -1,5 +1,7 @@
 package DoS;
 
+import java.util.logging.Logger;
+
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
 import org.newdawn.slick.opengl.SlickCallable;
@@ -29,9 +31,11 @@ public class PlayGame extends BasicGameState{
 	private boolean gamePause = false;
 	private GameModelBridge gmb;
 	private Element pause_game;
-	private Sound wait_min;
-	private Sound pause_sound;
-	private Sound resume_sound;
+   private Sound wait_min;
+   private Sound pause_sound;
+   private Sound resume_sound;
+   private Sound oh_yes;
+   private Sound dammit;
 	private Nifty nifty;
 	
 	private int seconds;
@@ -92,7 +96,9 @@ public class PlayGame extends BasicGameState{
 		wait_min = new Sound("res/Wait a Minute.wav");
 		pause_sound = new Sound("res/Pause, Think About That.wav");
 		resume_sound = new Sound("res/Coming Back from a Pause.wav");
-		gmb = new GameModelBridge();
+	   oh_yes = new Sound("res/Oh Yes.wav");
+	   dammit = new Sound("res/Dammit.wav");
+		gmb = new GameModelBridge(800);
 	}
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics gr) throws SlickException {
 		SlickCallable.enterSafeBlock();
@@ -124,18 +130,10 @@ public class PlayGame extends BasicGameState{
 		}
 	}
 	
-
-	   /*@Override
-	   public void mouseReleased(int button, int x, int y) {
-	      if (button == Input.MOUSE_LEFT_BUTTON) {
-	         System.out.println("click");
-	         xpos.add(x);
-	         ypos.add(y);
-	      }
-	   }*/
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		nifty.update();
 		Input input = gc.getInput();
+		int status = 0;
 		
 		if (gameStart == true) {
 		
@@ -169,7 +167,16 @@ public class PlayGame extends BasicGameState{
 			if(gc.getInput().isKeyPressed(Input.KEY_X)) {
 			   gmb.addWaveUnits(1);			   
 			}
-			gmb.gameLoop();
+			
+			status = gmb.gameLoop();
+			if((status & 1) > 0) {
+			   dammit.play();
+			}
+			if((status & 2) > 0) {
+            oh_yes.play();
+         }
+			status = 0;
+			
 		}
 		
 		else {
@@ -178,8 +185,7 @@ public class PlayGame extends BasicGameState{
 				gameStart = true;
 			
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				throw new SlickException("Game failed to start");
 			}
 		}
 	}
@@ -188,3 +194,4 @@ public class PlayGame extends BasicGameState{
 		return 1;
 	}
 }
+
